@@ -93,6 +93,24 @@ export function ApplicantDashboard() {
         </Link>
       </div>
 
+      {/* Admin Notice Banner if viewing as System Admin */}
+      {user?.role === 'admin' && (
+        <div className="bg-surface border-2 border-brand-dark p-4 rounded-md flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-flat text-xs">
+          <div>
+            <p className="font-bold text-text text-sm">System Administrator View</p>
+            <p className="text-text-muted mt-0.5">
+              Personal application tracking is intended for job seekers. As an admin, oversee all candidates and moderation in the Admin Control Center.
+            </p>
+          </div>
+          <Link
+            to="/admin"
+            className="px-4 py-2 bg-brand-dark text-white rounded-sm font-bold text-xs shrink-0 self-start sm:self-auto min-h-[44px] flex items-center justify-center"
+          >
+            Open Admin Center
+          </Link>
+        </div>
+      )}
+
       {/* Summary Stat Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 w-full min-w-0">
         <div className="bg-surface border border-border rounded-md p-3.5 sm:p-5 text-center shadow-flat min-w-0">

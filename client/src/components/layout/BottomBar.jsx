@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search, Briefcase, User, Bookmark, LayoutDashboard, ShieldCheck } from 'lucide-react';
+import { Search, Briefcase, User, Bookmark, LayoutDashboard, ShieldCheck, Flag, Users } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext.jsx';
 
 export function BottomBar() {
@@ -10,6 +10,16 @@ export function BottomBar() {
   const isActive = (path) => {
     if (path === '/' && location.pathname === '/') return true;
     if (path === '/saved' && (location.pathname === '/saved' || location.pathname === '/me/saved')) return true;
+    if (path.includes('?')) {
+      const [base, query] = path.split('?');
+      if (location.pathname !== base) return false;
+      const targetTab = new URLSearchParams(query).get('tab');
+      const currentTab = new URLSearchParams(location.search).get('tab') || 'reports';
+      return targetTab === currentTab;
+    }
+    if (path === '/admin') {
+      return location.pathname === '/admin';
+    }
     if (path !== '/' && location.pathname.startsWith(path)) return true;
     return false;
   };
@@ -37,9 +47,9 @@ export function BottomBar() {
     if (user.role === 'admin') {
       return [
         { path: '/jobs', label: 'Find Jobs', icon: Search },
-        { path: '/admin', label: 'Admin', icon: ShieldCheck },
-        { path: '/me/applications', label: 'Applications', icon: Briefcase },
-        { path: '/me/profile', label: 'Profile', icon: User },
+        { path: '/admin?tab=reports', label: 'Reports', icon: Flag },
+        { path: '/admin?tab=users', label: 'Users', icon: Users },
+        { path: '/admin?tab=jobs', label: 'Mod Jobs', icon: ShieldCheck },
       ];
     }
 

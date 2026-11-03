@@ -11,11 +11,11 @@ import {
 
 export const applicationRouter = Router();
 
-// Applicant: Get all personal applications
+// Applicant & Admin: Get all personal applications (admin receives empty array if none)
 applicationRouter.get(
   '/mine',
   authenticate,
-  authorize('applicant'),
+  authorize('applicant', 'admin'),
   applicationController.getApplicantApplications
 );
 

@@ -253,11 +253,11 @@ export function ProfilePage() {
   const resumes = profile?.resumes || [];
 
   return (
-    <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-5 sm:space-y-8 text-left">
+    <div className="w-full min-w-0 max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-5 sm:space-y-8 text-left overflow-x-hidden">
       {/* Page Header Strip */}
-      <div className="bg-sand border-b-2 border-brand p-4 sm:p-5 rounded-md">
-        <h1 className="text-xl sm:text-2xl font-bold text-text">Applicant Profile & Resumes</h1>
-        <p className="text-xs text-text-muted mt-1">
+      <div className="bg-sand border-b-2 border-brand p-4 sm:p-5 rounded-md w-full min-w-0">
+        <h1 className="text-xl sm:text-2xl font-bold text-text break-words">Applicant Profile & Resumes</h1>
+        <p className="text-xs text-text-muted mt-1 leading-relaxed">
           Manage your personal details, portfolio links, and up to 3 verified resumes.
         </p>
       </div>
@@ -454,21 +454,21 @@ export function ProfilePage() {
           </div>
 
           {/* Links section */}
-          <div>
+          <div className="w-full min-w-0">
             <label className="block text-xs font-bold text-text uppercase tracking-wider mb-1.5">
               Portfolio / Professional Links
             </label>
-            <div className="space-y-2 mb-3">
+            <div className="space-y-2 mb-3 w-full min-w-0">
               {links.map((link, idx) => (
-                <div key={idx} className="flex items-center justify-between p-2.5 rounded-sm bg-sand/20 border border-border text-sm">
-                  <div className="flex items-center space-x-2 truncate">
+                <div key={idx} className="flex items-center justify-between p-2.5 rounded-sm bg-sand/20 border border-border text-sm min-w-0 w-full gap-2">
+                  <div className="flex items-center space-x-2 min-w-0 flex-1 overflow-hidden">
                     <LinkIcon className="w-4 h-4 text-text-muted shrink-0" />
-                    <span className="font-bold text-text">{link.label}:</span>
+                    <span className="font-bold text-text shrink-0">{link.label}:</span>
                     <a
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-brand-dark underline truncate"
+                      className="text-brand-dark underline truncate min-w-0 flex-1"
                     >
                       {link.url}
                     </a>
@@ -476,7 +476,7 @@ export function ProfilePage() {
                   <button
                     type="button"
                     onClick={() => handleRemoveLink(idx)}
-                    className="text-text-muted hover:text-error p-1 cursor-pointer transition-colors"
+                    className="text-text-muted hover:text-error p-1.5 cursor-pointer transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0"
                     aria-label="Remove link"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -485,26 +485,26 @@ export function ProfilePage() {
               ))}
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-5 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 w-full min-w-0">
               <input
                 type="text"
                 value={newLinkLabel}
                 onChange={(e) => setNewLinkLabel(e.target.value)}
                 placeholder="Label (e.g. Portfolio)"
-                className="glass-input sm:col-span-2"
+                className="glass-input sm:col-span-2 w-full text-base"
               />
               <input
                 type="url"
                 value={newLinkUrl}
                 onChange={(e) => setNewLinkUrl(e.target.value)}
                 placeholder="https://mywork.com"
-                className="glass-input sm:col-span-2"
+                className="glass-input sm:col-span-2 w-full text-base"
               />
               <GlassButton
                 type="button"
                 variant="secondary"
                 onClick={handleAddLink}
-                className="flex items-center justify-center"
+                className="flex items-center justify-center min-h-[44px] w-full"
               >
                 <Plus className="w-4 h-4 mr-1" />
                 Add Link
@@ -533,32 +533,32 @@ export function ProfilePage() {
       </div>
 
       {/* 2. Resume Management Section */}
-      <div className="bg-surface border border-border rounded-md p-4 sm:p-6 md:p-8 space-y-6 shadow-flat">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-4 border-b border-divider">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-sm bg-sand text-text flex items-center justify-center border border-border">
+      <div className="bg-surface border border-border rounded-md p-3.5 sm:p-6 md:p-8 space-y-5 sm:space-y-6 shadow-flat min-w-0 w-full overflow-hidden">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-4 border-b border-divider min-w-0 w-full">
+          <div className="flex items-center space-x-3 min-w-0">
+            <div className="w-10 h-10 rounded-sm bg-sand text-text flex items-center justify-center border border-border shrink-0">
               <FileText className="w-5 h-5" />
             </div>
-            <div>
-              <h2 className="text-lg font-bold text-text">Resume Management</h2>
+            <div className="min-w-0">
+              <h2 className="text-base sm:text-lg font-bold text-text truncate">Resume Management</h2>
               <p className="text-xs text-text-muted">Maximum 3 resumes. Magic-byte signature verified.</p>
             </div>
           </div>
-          <GlassBadge variant="indigo" size="md">
+          <GlassBadge variant="indigo" size="md" className="self-start sm:self-auto shrink-0">
             {resumes.length} of 3 uploaded
           </GlassBadge>
         </div>
 
         {uploadError && (
-          <div className="p-3.5 rounded-sm bg-error-bg border border-error text-error text-xs font-semibold flex items-center space-x-2">
+          <div className="p-3.5 rounded-sm bg-error-bg border border-error text-error text-xs font-semibold flex items-center space-x-2 min-w-0">
             <AlertCircle className="w-4 h-4 shrink-0" />
-            <span>{uploadError}</span>
+            <span className="break-words">{uploadError}</span>
           </div>
         )}
 
         {/* Upload Dropzone */}
         {resumes.length < 3 ? (
-          <label className="border-2 border-dashed border-border rounded-md p-6 sm:p-8 flex flex-col items-center justify-center cursor-pointer bg-sand/10 hover:bg-sand/30 transition-all text-center">
+          <label className="border-2 border-dashed border-border rounded-md p-4 sm:p-8 flex flex-col items-center justify-center cursor-pointer bg-sand/10 hover:bg-sand/30 transition-all text-center min-w-0 w-full">
             <input
               type="file"
               accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
@@ -567,68 +567,68 @@ export function ProfilePage() {
               className="hidden"
             />
             {uploadResumeMutation.isPending ? (
-              <div className="space-y-2">
+              <div className="space-y-2 py-4">
                 <Loader2 className="w-8 h-8 text-brand-dark animate-spin mx-auto" />
                 <p className="text-sm font-semibold text-text">Verifying and uploading resume...</p>
               </div>
             ) : (
-              <div className="space-y-2">
-                <div className="w-12 h-12 rounded-sm bg-sand text-text flex items-center justify-center mx-auto border border-border">
-                  <Upload className="w-6 h-6" />
+              <div className="space-y-2 max-w-full px-2">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-sm bg-sand text-text flex items-center justify-center mx-auto border border-border">
+                  <Upload className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <p className="text-sm font-bold text-text">
                   Click to upload or drag & drop
                 </p>
-                <p className="text-xs text-text-muted">
+                <p className="text-xs text-text-muted break-words leading-relaxed">
                   PDF or DOCX (Max 5 MB) • Verified via magic byte signature
                 </p>
               </div>
             )}
           </label>
         ) : (
-          <div className="p-4 rounded-sm bg-sand border border-border text-xs text-text font-medium">
+          <div className="p-4 rounded-sm bg-sand border border-border text-xs text-text font-medium min-w-0">
             You have reached the maximum of 3 resumes. Delete an existing resume to upload a new one.
           </div>
         )}
 
         {/* Resumes List */}
-        <div className="space-y-3">
+        <div className="space-y-3 w-full min-w-0">
           {resumes.map((resume) => (
             <div
               key={resume._id}
-              className={`p-4 rounded-sm border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 transition-colors ${
+              className={`p-3.5 sm:p-4 rounded-sm border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 transition-colors min-w-0 w-full overflow-hidden ${
                 resume.isDefault
                   ? 'border-brand-dark bg-sand/30'
                   : 'border-border bg-surface'
               }`}
             >
-              <div className="flex items-center space-x-3 truncate">
-                <div className="w-10 h-10 rounded-sm bg-sand text-text flex items-center justify-center shrink-0 border border-border">
-                  <FileText className="w-5 h-5" />
+              <div className="flex items-center space-x-2.5 sm:space-x-3 min-w-0 w-full flex-1 overflow-hidden">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-sm bg-sand text-text flex items-center justify-center shrink-0 border border-border">
+                  <FileText className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
                 </div>
-                <div className="truncate">
-                  <div className="flex items-center space-x-2">
-                    <p className="text-sm font-bold text-text truncate">{resume.filename}</p>
+                <div className="min-w-0 flex-1 overflow-hidden">
+                  <div className="flex items-center space-x-1.5 sm:space-x-2 min-w-0">
+                    <p className="text-xs sm:text-sm font-bold text-text truncate max-w-[170px] sm:max-w-none">{resume.filename}</p>
                     {resume.isDefault && (
-                      <GlassBadge variant="success" size="sm">
+                      <GlassBadge variant="success" size="sm" className="shrink-0 text-[10px]">
                         Default
                       </GlassBadge>
                     )}
                   </div>
-                  <p className="text-xs text-text-muted">
+                  <p className="text-[11px] sm:text-xs text-text-muted truncate">
                     {(resume.size / 1024 / 1024).toFixed(2)} MB • Uploaded {new Date(resume.uploadedAt).toLocaleDateString()}
                   </p>
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+              <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto shrink-0 w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-divider">
                 {!resume.isDefault && (
                   <GlassButton
                     type="button"
                     variant="secondary"
                     size="sm"
                     onClick={() => setDefaultResumeMutation.mutate(resume._id)}
-                    className="min-h-[44px]"
+                    className="min-h-[44px] text-xs flex-1 sm:flex-none justify-center"
                   >
                     <Star className="w-3.5 h-3.5 mr-1" />
                     Set Default
@@ -639,7 +639,7 @@ export function ProfilePage() {
                   href={resume.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-3.5 py-2 rounded-sm text-xs font-bold text-brand-dark bg-sand hover:bg-accent border border-border transition-colors min-h-[44px]"
+                  className="inline-flex items-center justify-center px-3.5 py-2 rounded-sm text-xs font-bold text-brand-dark bg-sand hover:bg-accent border border-border transition-colors min-h-[44px] flex-1 sm:flex-none"
                 >
                   <Download className="w-3.5 h-3.5 mr-1" />
                   Download
@@ -648,7 +648,7 @@ export function ProfilePage() {
                 <button
                   type="button"
                   onClick={() => setResumeToDelete(resume)}
-                  className="inline-flex items-center p-2.5 rounded-sm text-error hover:bg-error-bg transition-colors cursor-pointer min-h-[44px] min-w-[44px] justify-center"
+                  className="inline-flex items-center p-2.5 rounded-sm text-error hover:bg-error-bg transition-colors cursor-pointer min-h-[44px] min-w-[44px] justify-center border border-border shrink-0"
                   aria-label="Delete resume"
                 >
                   <Trash2 className="w-4 h-4" />

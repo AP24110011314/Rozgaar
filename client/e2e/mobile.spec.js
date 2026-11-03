@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test';
 const DEMO_PASSWORD = process.env.SEED_DEMO_PASSWORD || 'RozgaarDemo2026!';
 const APPLICANT_EMAIL = process.env.SMOKE_APPLICANT_EMAIL || 'applicant@rozgaar.example';
 const RECRUITER_EMAIL = process.env.SMOKE_RECRUITER_EMAIL || 'recruiter@rozgaar.example';
+const ADMIN_EMAIL = process.env.SMOKE_ADMIN_EMAIL || 'admin@rozgaar.example';
 
 // Test matrix across compact mobile (320x568), iPhone SE (375x667), and iPhone 13/14 (390x844)
 const MOBILE_VIEWPORTS = [
@@ -249,6 +250,72 @@ for (const vp of MOBILE_VIEWPORTS) {
       expect(logoutBox).not.toBeNull();
       // Ensure the logout button is within vertical viewport
       expect(logoutBox.y + logoutBox.height).toBeLessThanOrEqual(vp.height + 10);
+    });
+
+    test('9. Profile & Resumes: Zero horizontal scroll on mobile and resume cards fit cleanly', async ({ page }) => {
+      // Login as applicant
+      await page.goto('/login');
+      await page.locator('#email').fill(APPLICANT_EMAIL);
+      await page.locator('#password').fill(DEMO_PASSWORD);
+      await page.locator('button[type="submit"]').click();
+      await page.waitForURL('**/me/applications', { timeout: 15000 });
+
+      // Navigate to profile
+      await page.goto('/me/profile');
+      await page.waitForLoadState('networkidle');
+
+      // Assert zero horizontal scroll on mobile profile page
+      const profileScroll = await page.evaluate(() => {
+        return document.documentElement.scrollWidth > document.documentElement.clientWidth;
+      });
+      expect(profileScroll).toBeFalsy();
+
+      // Verify Resume Management section is visible
+      const resumeHeading = page.locator('h2:has-text("Resume Management")');
+      await expect(resumeHeading).toBeVisible();
+
+      // Check upload dropzone is visible and within bounds
+      const dropzone = page.locator('text=Click to upload or drag & drop');
+      await expect(dropzone).toBeVisible();
+      const dropzoneBox = await dropzone.boundingBox();
+      expect(dropzoneBox?.x).toBeGreaterThanOrEqual(0);
+      expect((dropzoneBox?.x || 0) + (dropzoneBox?.width || 0)).toBeLessThanOrEqual(vp.width + 5);
+    });
+
+    test('10. Admin Dashboard & Mobile Bar: Zero horizontal scroll and bottom bar tabs switch views', async ({ page }) => {
+      // Login as admin
+      await page.goto('/login');
+      await page.locator('#email').fill(ADMIN_EMAIL);
+      await page.locator('#password').fill(DEMO_PASSWORD);
+      await page.locator('button[type="submit"]').click();
+      await page.waitForURL('**/admin', { timeout: 15000 });
+
+      // Assert zero horizontal scroll on Admin Dashboard
+      const adminScroll = await page.evaluate(() => {
+        return document.documentElement.scrollWidth > document.documentElement.clientWidth;
+      });
+      expect(adminScroll).toBeFalsy();
+
+      // Verify Admin Control Center header and metrics
+      await expect(page.locator('h1:has-text("Admin Control Center")')).toBeVisible();
+      await expect(page.locator('p:has-text("Total Users")')).toBeVisible();
+
+      // Check bottom bar has admin-specific tabs
+      const bottomBar = page.locator('nav[aria-label="Mobile Bottom App Bar"]');
+      await expect(bottomBar).toBeVisible();
+      await expect(bottomBar.locator('a:has-text("Reports")')).toBeVisible();
+      await expect(bottomBar.locator('a:has-text("Users")')).toBeVisible();
+
+      // Click Users tab in bottom bar
+      await bottomBar.locator('a:has-text("Users")').click();
+      await page.waitForURL('**/admin?tab=users', { timeout: 8000 });
+      await expect(page.locator('input[placeholder*="Search user"]')).toBeVisible();
+
+      // Visiting /me/applications as admin does not show 403 error
+      await page.goto('/me/applications');
+      await page.waitForLoadState('networkidle');
+      await expect(page.locator('text=Request failed with status code 403')).not.toBeVisible();
+      await expect(page.locator('text=System Administrator View')).toBeVisible();
     });
   });
 }

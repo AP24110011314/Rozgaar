@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import {
   ShieldCheck,
   Users,
@@ -20,9 +20,19 @@ import { GlassBadge } from '../../components/glass/GlassBadge.jsx';
 export function AdminDashboard() {
   const { user } = useAuth();
   const queryClient = useQueryClient();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  // Active Tab
-  const [activeTab, setActiveTab] = useState('reports');
+  // Active Tab from query param (defaults to 'reports')
+  const currentTab = searchParams.get('tab');
+  const activeTab = ['reports', 'users', 'companies', 'jobs'].includes(currentTab) ? currentTab : 'reports';
+
+  const setActiveTab = (tab) => {
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      next.set('tab', tab);
+      return next;
+    });
+  };
 
   // Search and filter states
   const [reportsStatus, setReportsStatus] = useState('pending');
@@ -147,87 +157,87 @@ export function AdminDashboard() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8 text-left">
+    <div className="w-full min-w-0 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-5 sm:space-y-8 text-left overflow-x-hidden">
       {/* Header */}
-      <div className="bg-sand border-b-2 border-brand p-4 sm:p-5 rounded-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <div className="flex items-center space-x-2">
+      <div className="bg-sand border-b-2 border-brand p-4 sm:p-5 rounded-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 w-full min-w-0">
+        <div className="min-w-0">
+          <div className="flex items-center space-x-2 min-w-0">
             <span className="p-2 rounded-sm bg-surface text-brand-dark border border-border shrink-0">
               <ShieldCheck className="w-5 h-5" />
             </span>
-            <h1 className="text-xl sm:text-3xl font-bold text-text">Admin Control Center</h1>
+            <h1 className="text-xl sm:text-3xl font-bold text-text truncate">Admin Control Center</h1>
           </div>
-          <p className="text-xs text-text-muted mt-1 leading-relaxed">
+          <p className="text-xs text-text-muted mt-1 leading-relaxed break-words">
             Moderate job postings, review reported listings, oversee verified companies, and deactivate malicious accounts.
           </p>
         </div>
-        <div className="flex items-center space-x-2 self-start sm:self-auto">
+        <div className="flex items-center space-x-2 self-start sm:self-auto shrink-0">
           <GlassBadge variant="indigo" size="md">
             System Administrator
           </GlassBadge>
         </div>
       </div>
 
-      {/* Metrics Strip */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-        <div className="bg-surface border border-border rounded-md p-4 sm:p-5 flex items-center space-x-3 sm:space-x-4 shadow-flat">
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-sm bg-sand text-text flex items-center justify-center border border-border shrink-0">
-            <Users className="w-5 h-5 sm:w-6 sm:h-6" />
+      {/* Metrics Strip - 2x2 on mobile, 4 columns on desktop with zero overflow */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 w-full min-w-0">
+        <div className="bg-surface border border-border rounded-md p-3 sm:p-5 flex items-center space-x-2.5 sm:space-x-4 shadow-flat min-w-0 overflow-hidden">
+          <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-sm bg-sand text-text flex items-center justify-center border border-border shrink-0">
+            <Users className="w-4.5 h-4.5 sm:w-6 sm:h-6" />
           </div>
-          <div className="truncate">
-            <p className="text-[11px] sm:text-xs font-bold text-text-muted uppercase tracking-wider">Total Users</p>
-            <p className="text-lg sm:text-2xl font-bold text-text">{stats.users.total}</p>
+          <div className="min-w-0 flex-1 overflow-hidden">
+            <p className="text-[10px] sm:text-xs font-bold text-text-muted uppercase tracking-wider truncate">Total Users</p>
+            <p className="text-base sm:text-2xl font-bold text-text truncate">{stats.users.total}</p>
             <p className="text-[10px] text-text-muted truncate">
               {stats.users.applicants} seekers • {stats.users.recruiters} recruiters
             </p>
           </div>
         </div>
 
-        <div className="bg-surface border border-border rounded-md p-4 sm:p-5 flex items-center space-x-3 sm:space-x-4 shadow-flat">
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-sm bg-sand text-text flex items-center justify-center border border-border shrink-0">
-            <Building2 className="w-5 h-5 sm:w-6 sm:h-6" />
+        <div className="bg-surface border border-border rounded-md p-3 sm:p-5 flex items-center space-x-2.5 sm:space-x-4 shadow-flat min-w-0 overflow-hidden">
+          <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-sm bg-sand text-text flex items-center justify-center border border-border shrink-0">
+            <Building2 className="w-4.5 h-4.5 sm:w-6 sm:h-6" />
           </div>
-          <div className="truncate">
-            <p className="text-[11px] sm:text-xs font-bold text-text-muted uppercase tracking-wider">Companies</p>
-            <p className="text-lg sm:text-2xl font-bold text-text">{stats.companies.total}</p>
-            <p className="text-[10px] text-text-muted">Registered SMBs</p>
-          </div>
-        </div>
-
-        <div className="bg-surface border border-border rounded-md p-4 sm:p-5 flex items-center space-x-3 sm:space-x-4 shadow-flat">
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-sm bg-mint text-text flex items-center justify-center border border-border shrink-0">
-            <Briefcase className="w-5 h-5 sm:w-6 sm:h-6" />
-          </div>
-          <div className="truncate">
-            <p className="text-[11px] sm:text-xs font-bold text-text-muted uppercase tracking-wider">Open Jobs</p>
-            <p className="text-lg sm:text-2xl font-bold text-text">{stats.jobs.open}</p>
-            <p className="text-[10px] text-text-muted">{stats.jobs.total} listings</p>
+          <div className="min-w-0 flex-1 overflow-hidden">
+            <p className="text-[10px] sm:text-xs font-bold text-text-muted uppercase tracking-wider truncate">Companies</p>
+            <p className="text-base sm:text-2xl font-bold text-text truncate">{stats.companies.total}</p>
+            <p className="text-[10px] text-text-muted truncate">Registered SMBs</p>
           </div>
         </div>
 
-        <div className="bg-surface border border-border rounded-md p-4 sm:p-5 flex items-center space-x-3 sm:space-x-4 shadow-flat">
-          <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-sm flex items-center justify-center shrink-0 border ${
+        <div className="bg-surface border border-border rounded-md p-3 sm:p-5 flex items-center space-x-2.5 sm:space-x-4 shadow-flat min-w-0 overflow-hidden">
+          <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-sm bg-mint text-text flex items-center justify-center border border-border shrink-0">
+            <Briefcase className="w-4.5 h-4.5 sm:w-6 sm:h-6" />
+          </div>
+          <div className="min-w-0 flex-1 overflow-hidden">
+            <p className="text-[10px] sm:text-xs font-bold text-text-muted uppercase tracking-wider truncate">Open Jobs</p>
+            <p className="text-base sm:text-2xl font-bold text-text truncate">{stats.jobs.open}</p>
+            <p className="text-[10px] text-text-muted truncate">{stats.jobs.total} listings</p>
+          </div>
+        </div>
+
+        <div className="bg-surface border border-border rounded-md p-3 sm:p-5 flex items-center space-x-2.5 sm:space-x-4 shadow-flat min-w-0 overflow-hidden">
+          <div className={`w-9 h-9 sm:w-12 sm:h-12 rounded-sm flex items-center justify-center shrink-0 border ${
             stats.reports.pending > 0
               ? 'bg-error-bg text-error border-error'
               : 'bg-sand/30 text-text border-border'
           }`}>
-            <Flag className="w-5 h-5 sm:w-6 sm:h-6" />
+            <Flag className="w-4.5 h-4.5 sm:w-6 sm:h-6" />
           </div>
-          <div className="truncate">
-            <p className="text-[11px] sm:text-xs font-bold text-text-muted uppercase tracking-wider">Pending Reports</p>
-            <p className={`text-lg sm:text-2xl font-bold ${stats.reports.pending > 0 ? 'text-error' : 'text-text'}`}>
+          <div className="min-w-0 flex-1 overflow-hidden">
+            <p className="text-[10px] sm:text-xs font-bold text-text-muted uppercase tracking-wider truncate">Pending Reports</p>
+            <p className={`text-base sm:text-2xl font-bold truncate ${stats.reports.pending > 0 ? 'text-error' : 'text-text'}`}>
               {stats.reports.pending}
             </p>
-            <p className="text-[10px] text-text-muted">Needs review</p>
+            <p className="text-[10px] text-text-muted truncate">Needs review</p>
           </div>
         </div>
       </div>
 
       {/* Tabs with Horizontal Scroll and Snap Points */}
-      <div className="flex border-b border-divider space-x-4 sm:space-x-8 text-sm font-bold overflow-x-auto scrollbar-none snap-x snap-mandatory">
+      <div className="flex border-b border-divider space-x-4 sm:space-x-8 text-sm font-bold overflow-x-auto scrollbar-none snap-x snap-mandatory max-w-full pb-1">
         <button
           onClick={() => setActiveTab('reports')}
-          className={`pb-3 transition-colors relative flex items-center space-x-2 min-h-[44px] whitespace-nowrap cursor-pointer snap-start ${
+          className={`pb-3 transition-colors relative flex items-center space-x-2 min-h-[44px] whitespace-nowrap cursor-pointer snap-start shrink-0 ${
             activeTab === 'reports'
               ? 'text-text border-b-2 border-brand-dark font-bold'
               : 'text-text-muted hover:text-text'
@@ -244,7 +254,7 @@ export function AdminDashboard() {
 
         <button
           onClick={() => setActiveTab('users')}
-          className={`pb-3 transition-colors relative flex items-center space-x-2 min-h-[44px] whitespace-nowrap cursor-pointer snap-start ${
+          className={`pb-3 transition-colors relative flex items-center space-x-2 min-h-[44px] whitespace-nowrap cursor-pointer snap-start shrink-0 ${
             activeTab === 'users'
               ? 'text-text border-b-2 border-brand-dark font-bold'
               : 'text-text-muted hover:text-text'
@@ -256,7 +266,7 @@ export function AdminDashboard() {
 
         <button
           onClick={() => setActiveTab('companies')}
-          className={`pb-3 transition-colors relative flex items-center space-x-2 min-h-[44px] whitespace-nowrap cursor-pointer snap-start ${
+          className={`pb-3 transition-colors relative flex items-center space-x-2 min-h-[44px] whitespace-nowrap cursor-pointer snap-start shrink-0 ${
             activeTab === 'companies'
               ? 'text-text border-b-2 border-brand-dark font-bold'
               : 'text-text-muted hover:text-text'
@@ -268,7 +278,7 @@ export function AdminDashboard() {
 
         <button
           onClick={() => setActiveTab('jobs')}
-          className={`pb-3 transition-colors relative flex items-center space-x-2 min-h-[44px] whitespace-nowrap cursor-pointer snap-start ${
+          className={`pb-3 transition-colors relative flex items-center space-x-2 min-h-[44px] whitespace-nowrap cursor-pointer snap-start shrink-0 ${
             activeTab === 'jobs'
               ? 'text-text border-b-2 border-brand-dark font-bold'
               : 'text-text-muted hover:text-text'
@@ -313,16 +323,16 @@ export function AdminDashboard() {
               <p className="text-xs text-text-muted">No reports found matching status "{reportsStatus || 'all'}".</p>
             </div>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-4 w-full min-w-0">
               {(reportsData?.data || []).map((report) => (
                 <div
                   key={report._id}
-                  className="bg-surface border border-border rounded-md p-4 sm:p-5 space-y-4 hover:border-brand-dark transition-all shadow-flat"
+                  className="bg-surface border border-border rounded-md p-3.5 sm:p-5 space-y-3 sm:space-y-4 hover:border-brand-dark transition-all shadow-flat min-w-0 w-full overflow-hidden"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-                    <div className="space-y-1">
-                      <div className="flex items-center space-x-2">
-                        <GlassBadge variant="danger" size="sm" className="uppercase tracking-wider">
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4 min-w-0 w-full">
+                    <div className="space-y-1 min-w-0 flex-1 overflow-hidden">
+                      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                        <GlassBadge variant="danger" size="sm" className="uppercase tracking-wider text-[10px]">
                           {report.reason}
                         </GlassBadge>
                         <span className="text-xs font-semibold text-text-muted">
@@ -330,17 +340,17 @@ export function AdminDashboard() {
                         </span>
                       </div>
 
-                      <h3 className="text-base font-bold text-text pt-1">
+                      <h3 className="text-sm sm:text-base font-bold text-text pt-1 break-words">
                         Listing: {report.job?.title || 'Unknown Job'}
                       </h3>
-                      <p className="text-xs text-text-muted">
+                      <p className="text-xs text-text-muted break-words">
                         Employer: {report.job?.company?.name || 'Local Company'} • Job Status:{' '}
                         <span className="font-bold text-text">{report.job?.status}</span>
                       </p>
                     </div>
 
                     {/* Action buttons */}
-                    <div className="flex flex-wrap items-center gap-2 shrink-0">
+                    <div className="flex flex-wrap items-center gap-2 shrink-0 w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-divider">
                       {report.status === 'pending' && (
                         <>
                           <GlassButton
@@ -355,7 +365,7 @@ export function AdminDashboard() {
                               })
                             }
                             disabled={updateReportMutation.isPending}
-                            className="min-h-[44px]"
+                            className="min-h-[44px] flex-1 sm:flex-none justify-center"
                           >
                             Close Listing
                           </GlassButton>
@@ -372,7 +382,7 @@ export function AdminDashboard() {
                               })
                             }
                             disabled={updateReportMutation.isPending}
-                            className="min-h-[44px]"
+                            className="min-h-[44px] flex-1 sm:flex-none justify-center"
                           >
                             Dismiss
                           </GlassButton>
@@ -382,11 +392,11 @@ export function AdminDashboard() {
                   </div>
 
                   {/* Report Details and Reporter */}
-                  <div className="p-3.5 rounded-sm bg-sand/20 border border-border text-xs space-y-2">
+                  <div className="p-3 sm:p-3.5 rounded-sm bg-sand/20 border border-border text-xs space-y-1.5 min-w-0 overflow-hidden">
                     {report.text && (
-                      <p className="text-text italic">"{report.text}"</p>
+                      <p className="text-text italic break-words">"{report.text}"</p>
                     )}
-                    <p className="text-[11px] text-text-muted">
+                    <p className="text-[11px] text-text-muted break-all">
                       Reported by {report.reporter?.name} ({report.reporter?.email})
                     </p>
                   </div>

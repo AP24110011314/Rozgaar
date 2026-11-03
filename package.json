@@ -1,0 +1,27 @@
+{
+  "name": "rozgaar",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "description": "Rozgaar (रोज़गार) - Geo-aware ATS for local SMBs and job seekers",
+  "scripts": {
+    "install:all": "npm --prefix server install && npm --prefix client install",
+    "seed": "npm --prefix server run seed",
+    "seed:reset": "npm --prefix server run seed:reset",
+    "db:ping": "npm --prefix server run db:ping",
+    "db:indexes": "npm --prefix server run db:indexes",
+    "check:urls": "node scripts/check-urls.js",
+    "check:secrets": "node scripts/check-secrets.js",
+    "check:storage": "npm --prefix server run check:storage",
+    "verify": "npm run test && npm run check:urls && npm run check:secrets && npm run build:client",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "build:client": "npm --prefix client run build",
+    "smoke": "npm --prefix server run smoke",
+    "e2e": "npm --prefix client run e2e",
+    "e2e:mobile": "npm --prefix client run e2e:mobile",
+    "test:server": "npm --prefix server run test",
+    "test:client": "npm --prefix client run test",
+    "test": "npm run test:server && npm run test:client"
+  }
+}

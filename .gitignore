@@ -1,0 +1,20 @@
+node_modules/
+.DS_Store
+*.log
+
+# Environment variables & secrets
+.env
+.env.*
+*.env
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
+
+# Local storage uploads
+server/uploads/*
+!server/uploads/.gitkeep
+
+# Build artifacts & coverage
+dist/
+coverage/

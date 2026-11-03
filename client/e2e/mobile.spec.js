@@ -92,6 +92,13 @@ for (const vp of MOBILE_VIEWPORTS) {
       // Other tabs must NOT have active class
       const savedTab = bottomBar.locator('a:has-text("Saved")');
       await expect(savedTab).not.toHaveClass(/bg-accent/);
+
+      // Clicking Saved when unauthenticated opens /saved without redirecting to /login
+      await savedTab.click();
+      await page.waitForURL('**/saved', { timeout: 8000 });
+      await expect(savedTab).toHaveClass(/bg-accent/);
+      await expect(signInTab).not.toHaveClass(/bg-accent/);
+      await expect(page.locator('h2:has-text("Sign in to view your saved jobs")')).toBeVisible();
     });
 
     test('4. Job Search: Filter button opens bottom sheet drawer and applies criteria', async ({ page }) => {

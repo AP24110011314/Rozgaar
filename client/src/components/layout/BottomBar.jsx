@@ -9,6 +9,7 @@ export function BottomBar() {
 
   const isActive = (path) => {
     if (path === '/' && location.pathname === '/') return true;
+    if (path === '/saved' && (location.pathname === '/saved' || location.pathname === '/me/saved')) return true;
     if (path !== '/' && location.pathname.startsWith(path)) return true;
     return false;
   };
@@ -18,7 +19,7 @@ export function BottomBar() {
     if (!isAuthenticated || !user) {
       return [
         { path: '/jobs', label: 'Find Jobs', icon: Search },
-        { path: '/me/saved', label: 'Saved', icon: Bookmark },
+        { path: '/saved', label: 'Saved', icon: Bookmark },
         { path: '/login', label: 'Sign in', icon: User },
         { path: '/register', label: 'Sign up', icon: Briefcase },
       ];
@@ -46,7 +47,7 @@ export function BottomBar() {
     return [
       { path: '/jobs', label: 'Find Jobs', icon: Search },
       { path: '/me/applications', label: 'Applications', icon: Briefcase },
-      { path: '/me/saved', label: 'Saved', icon: Bookmark },
+      { path: '/saved', label: 'Saved', icon: Bookmark },
       { path: '/me/profile', label: 'Profile', icon: User },
     ];
   };

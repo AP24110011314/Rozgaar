@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Bookmark, Building2, MapPin, IndianRupee, ArrowRight, Trash2, Loader2, Briefcase } from 'lucide-react';
+import { Bookmark, Building2, MapPin, IndianRupee, ArrowRight, Trash2, Loader2, Briefcase, Lock } from 'lucide-react';
 import { api } from '../../api/axios.js';
+import { useAuth } from '../../context/AuthContext.jsx';
 import { GlassCard } from '../../components/glass/GlassCard.jsx';
 import { GlassButton } from '../../components/glass/GlassButton.jsx';
 import { GlassBadge } from '../../components/glass/GlassBadge.jsx';
 
 export function SavedJobsPage() {
+  const { user, isAuthenticated } = useAuth();
   const queryClient = useQueryClient();
 
   const { data: savedJobs = [], isLoading } = useQuery({
@@ -16,6 +18,7 @@ export function SavedJobsPage() {
       const res = await api.get('/jobs/saved');
       return res.data.data;
     },
+    enabled: !!isAuthenticated && user?.role === 'applicant',
   });
 
   const unsaveMutation = useMutation({
@@ -29,6 +32,85 @@ export function SavedJobsPage() {
     },
   });
 
+  // 1. Unauthenticated Guest State - Clear explanation with actions instead of abrupt redirect
+  if (!isAuthenticated) {
+    return (
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-4 sm:space-y-6 text-left">
+        {/* Header */}
+        <div className="bg-sand border-b-2 border-brand p-4 sm:p-5 rounded-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-text flex items-center">
+              <Bookmark className="w-5 h-5 sm:w-6 sm:h-6 mr-2 text-brand" />
+              Saved Jobs
+            </h1>
+            <p className="text-xs text-text-muted mt-1">
+              Jobs you bookmark for easy reference and quick application.
+            </p>
+          </div>
+        </div>
+
+        {/* Guest Informational Card */}
+        <div className="bg-surface border border-border rounded-md p-8 sm:p-12 text-center space-y-4 shadow-flat max-w-xl mx-auto">
+          <div className="w-14 h-14 rounded-sm bg-sand text-brand-dark flex items-center justify-center mx-auto border border-border">
+            <Bookmark className="w-7 h-7" />
+          </div>
+          <div className="space-y-2">
+            <h2 className="text-lg sm:text-xl font-bold text-text">Sign in to view your saved jobs</h2>
+            <p className="text-sm text-text-muted">
+              Bookmark verified jobs while browsing and access your saved positions anytime across all your devices.
+            </p>
+          </div>
+          <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link to="/login" state={{ from: { pathname: '/saved' } }} className="w-full sm:w-auto">
+              <GlassButton variant="primary" className="w-full justify-center">
+                Sign in
+              </GlassButton>
+            </Link>
+            <Link to="/register" className="w-full sm:w-auto">
+              <GlassButton variant="secondary" className="w-full justify-center">
+                Create an account
+              </GlassButton>
+            </Link>
+          </div>
+          <div className="pt-2">
+            <Link to="/jobs" className="text-sm font-bold text-brand-dark hover:underline inline-flex items-center">
+              Explore Verified Jobs <ArrowRight className="w-4 h-4 ml-1" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 2. Non-applicant State (e.g. Recruiter or Admin)
+  if (user?.role === 'recruiter') {
+    return (
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-4 sm:space-y-6 text-left">
+        <div className="bg-sand border-b-2 border-brand p-4 sm:p-5 rounded-md">
+          <h1 className="text-xl sm:text-2xl font-bold text-text flex items-center">
+            <Bookmark className="w-5 h-5 sm:w-6 sm:h-6 mr-2 text-brand" />
+            Saved Jobs
+          </h1>
+        </div>
+        <div className="bg-surface border border-border rounded-md p-8 sm:p-12 text-center space-y-4 shadow-flat max-w-xl mx-auto">
+          <div className="w-14 h-14 rounded-sm bg-sand text-brand-dark flex items-center justify-center mx-auto border border-border">
+            <Briefcase className="w-7 h-7" />
+          </div>
+          <h2 className="text-lg sm:text-xl font-bold text-text">Applicant Feature</h2>
+          <p className="text-sm text-text-muted">
+            Saving jobs is an applicant feature. As an employer, manage your postings and pipelines from your recruiter dashboard.
+          </p>
+          <div className="pt-2">
+            <Link to="/recruiter/jobs">
+              <GlassButton variant="primary">Go to Recruiter Dashboard</GlassButton>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 3. Loading State
   if (isLoading) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-6 space-y-4 bg-surface border border-border rounded-md max-w-7xl mx-auto my-8">

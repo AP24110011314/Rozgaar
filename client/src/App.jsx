@@ -64,6 +64,7 @@ export function App() {
                 <Route path="/jobs" element={<JobsListPage />} />
                 <Route path="/jobs/:id" element={<JobDetailPage />} />
                 <Route path="/jobs/:id/apply" element={<ApplyPage />} />
+                <Route path="/saved" element={<SavedJobsPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/forgot-password" element={<ForgotPasswordPage />} />

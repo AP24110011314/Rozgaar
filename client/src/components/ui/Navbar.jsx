@@ -30,6 +30,7 @@ export function Navbar() {
 
   const isActive = (path) => {
     if (path === '/' && location.pathname === '/') return true;
+    if ((path === '/saved' || path === '/me/saved') && (location.pathname === '/saved' || location.pathname === '/me/saved')) return true;
     if (path !== '/' && location.pathname.startsWith(path)) return true;
     return false;
   };
@@ -153,7 +154,7 @@ export function Navbar() {
                   <Link to="/me/profile" className={navLinkClasses('/me/profile')}>
                     Profile & Resumes
                   </Link>
-                  <Link to="/me/saved" className={navLinkClasses('/me/saved')}>
+                  <Link to="/saved" className={navLinkClasses('/saved')}>
                     Saved Jobs
                   </Link>
                 </>
@@ -344,10 +345,10 @@ export function Navbar() {
                           Profile & Resumes
                         </Link>
                         <Link
-                          to="/me/saved"
+                          to="/saved"
                           onClick={() => setMobileMenuOpen(false)}
                           className={`block px-3.5 py-3 rounded-md text-base font-bold text-text min-h-[44px] flex items-center ${
-                            isActive('/me/saved') ? 'bg-surface border-l-4 border-brand-dark font-extrabold' : 'hover:bg-surface/60'
+                            isActive('/saved') ? 'bg-surface border-l-4 border-brand-dark font-extrabold' : 'hover:bg-surface/60'
                           }`}
                         >
                           Saved Jobs

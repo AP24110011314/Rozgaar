@@ -39,12 +39,12 @@ export function SavedJobsPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 text-left">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-4 sm:space-y-6 text-left">
       {/* Header */}
-      <div className="bg-sand border-b-2 border-brand p-5 rounded-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="bg-sand border-b-2 border-brand p-4 sm:p-5 rounded-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-text flex items-center">
-            <Bookmark className="w-6 h-6 mr-2 text-brand" />
+          <h1 className="text-xl sm:text-2xl font-bold text-text flex items-center">
+            <Bookmark className="w-5 h-5 sm:w-6 sm:h-6 mr-2 text-brand" />
             Saved Jobs
           </h1>
           <p className="text-xs text-text-muted mt-1">

@@ -98,12 +98,12 @@ export function RecruiterJobsPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 text-left">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-5 sm:space-y-8 text-left">
       {/* Header */}
-      <div className="bg-sand border-b-2 border-brand p-5 rounded-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="bg-sand border-b-2 border-brand p-4 sm:p-5 rounded-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
         <div>
           <div className="flex items-center space-x-2">
-            <h1 className="text-2xl sm:text-3xl font-bold text-text">Job Listings & Pipelines</h1>
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-text">Job Listings & Pipelines</h1>
             <GlassBadge variant="indigo" size="md">
               {jobs.length} total
             </GlassBadge>
@@ -112,15 +112,15 @@ export function RecruiterJobsPage() {
             Manage your open postings, track candidates through Kanban boards, and hire top local talent.
           </p>
         </div>
-        <div className="flex items-center space-x-3">
-          <Link to="/recruiter/company">
-            <GlassButton variant="secondary" size="md">
+        <div className="flex flex-col xs:flex-row items-stretch xs:items-center gap-2 sm:gap-3 w-full sm:w-auto">
+          <Link to="/recruiter/company" className="w-full sm:w-auto">
+            <GlassButton variant="secondary" size="md" className="w-full justify-center min-h-[44px]">
               <Building2 className="w-4 h-4 mr-1.5 text-brand" />
               Company Profile
             </GlassButton>
           </Link>
-          <Link to="/recruiter/jobs/new">
-            <GlassButton variant="primary" size="md">
+          <Link to="/recruiter/jobs/new" className="w-full sm:w-auto">
+            <GlassButton variant="primary" size="md" className="w-full justify-center min-h-[44px]">
               <Plus className="w-4 h-4 mr-1.5" />
               Post New Job
             </GlassButton>
@@ -129,44 +129,44 @@ export function RecruiterJobsPage() {
       </div>
 
       {/* Metrics Strip */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="bg-surface border border-border rounded-md p-4 sm:p-5 flex items-center space-x-3 shadow-flat">
-          <div className="w-11 h-11 rounded-sm bg-mint text-text flex items-center justify-center border border-border">
-            <Briefcase className="w-5 h-5" />
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4">
+        <div className="bg-surface border border-border rounded-md p-3 sm:p-5 flex items-center space-x-2.5 sm:space-x-3 shadow-flat">
+          <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-sm bg-mint text-text flex items-center justify-center border border-border shrink-0">
+            <Briefcase className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
-          <div>
-            <p className="text-xs font-bold text-text-muted uppercase tracking-wider">Open Jobs</p>
-            <p className="text-xl sm:text-2xl font-bold text-text">{totalOpen}</p>
-          </div>
-        </div>
-
-        <div className="bg-surface border border-border rounded-md p-4 sm:p-5 flex items-center space-x-3 shadow-flat">
-          <div className="w-11 h-11 rounded-sm bg-sand text-text flex items-center justify-center border border-border">
-            <Clock className="w-5 h-5" />
-          </div>
-          <div>
-            <p className="text-xs font-bold text-text-muted uppercase tracking-wider">Drafts</p>
-            <p className="text-xl sm:text-2xl font-bold text-text">{totalDraft}</p>
+          <div className="truncate">
+            <p className="text-[10px] sm:text-xs font-bold text-text-muted uppercase tracking-wider">Open Jobs</p>
+            <p className="text-lg sm:text-2xl font-bold text-text">{totalOpen}</p>
           </div>
         </div>
 
-        <div className="bg-surface border border-border rounded-md p-4 sm:p-5 flex items-center space-x-3 shadow-flat">
-          <div className="w-11 h-11 rounded-sm bg-sand/30 text-text flex items-center justify-center border border-border">
-            <AlertCircle className="w-5 h-5" />
+        <div className="bg-surface border border-border rounded-md p-3 sm:p-5 flex items-center space-x-2.5 sm:space-x-3 shadow-flat">
+          <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-sm bg-sand text-text flex items-center justify-center border border-border shrink-0">
+            <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
-          <div>
-            <p className="text-xs font-bold text-text-muted uppercase tracking-wider">Closed</p>
-            <p className="text-xl sm:text-2xl font-bold text-text">{totalClosed}</p>
+          <div className="truncate">
+            <p className="text-[10px] sm:text-xs font-bold text-text-muted uppercase tracking-wider">Drafts</p>
+            <p className="text-lg sm:text-2xl font-bold text-text">{totalDraft}</p>
           </div>
         </div>
 
-        <div className="bg-surface border border-border rounded-md p-4 sm:p-5 flex items-center space-x-3 shadow-flat">
-          <div className="w-11 h-11 rounded-sm bg-accent/40 text-text flex items-center justify-center border border-border">
-            <Users className="w-5 h-5" />
+        <div className="bg-surface border border-border rounded-md p-3 sm:p-5 flex items-center space-x-2.5 sm:space-x-3 shadow-flat">
+          <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-sm bg-sand/30 text-text flex items-center justify-center border border-border shrink-0">
+            <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
-          <div>
-            <p className="text-xs font-bold text-text-muted uppercase tracking-wider">Applications</p>
-            <p className="text-xl sm:text-2xl font-bold text-text">{totalApplications}</p>
+          <div className="truncate">
+            <p className="text-[10px] sm:text-xs font-bold text-text-muted uppercase tracking-wider">Closed</p>
+            <p className="text-lg sm:text-2xl font-bold text-text">{totalClosed}</p>
+          </div>
+        </div>
+
+        <div className="bg-surface border border-border rounded-md p-3 sm:p-5 flex items-center space-x-2.5 sm:space-x-3 shadow-flat">
+          <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-sm bg-accent/40 text-text flex items-center justify-center border border-border shrink-0">
+            <Users className="w-4 h-4 sm:w-5 sm:h-5" />
+          </div>
+          <div className="truncate">
+            <p className="text-[10px] sm:text-xs font-bold text-text-muted uppercase tracking-wider">Applications</p>
+            <p className="text-lg sm:text-2xl font-bold text-text">{totalApplications}</p>
           </div>
         </div>
       </div>
@@ -311,10 +311,10 @@ export function RecruiterJobsPage() {
               </div>
 
               {/* Action Buttons & Pipeline link */}
-              <div className="flex flex-wrap items-center gap-3 shrink-0 pt-4 lg:pt-0 border-t lg:border-t-0 border-divider">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 shrink-0 pt-4 lg:pt-0 border-t lg:border-t-0 border-divider w-full lg:w-auto justify-between lg:justify-end">
                 {/* Kanban Pipeline link */}
-                <Link to={`/recruiter/jobs/${job._id}/board`}>
-                  <GlassButton variant="primary" size="sm" className="flex items-center">
+                <Link to={`/recruiter/jobs/${job._id}/board`} className="flex-1 sm:flex-initial">
+                  <GlassButton variant="primary" size="sm" className="w-full sm:w-auto justify-center flex items-center min-h-[44px]">
                     <Columns3 className="w-4 h-4 mr-1.5" />
                     Pipeline
                     <span className="ml-1.5 px-2 py-0.5 rounded-sm bg-accent text-text text-[10px] font-bold border border-border">
@@ -323,61 +323,63 @@ export function RecruiterJobsPage() {
                   </GlassButton>
                 </Link>
 
-                {/* Status Switcher */}
-                <div className="relative inline-block text-left">
-                  <select
-                    value={job.status}
-                    onChange={(e) =>
-                      statusMutation.mutate({ id: job._id, status: e.target.value })
-                    }
-                    disabled={statusMutation.isPending}
-                    aria-label={`Status for ${job.title}`}
-                    className="min-h-[44px] appearance-none bg-surface border border-border text-text text-xs font-bold py-2 pl-3 pr-7 rounded-sm hover:bg-sand/30 focus:outline-none focus:ring-2 focus:ring-brand-dark cursor-pointer disabled:opacity-50 transition-all"
+                <div className="flex items-center gap-2 shrink-0">
+                  {/* Status Switcher */}
+                  <div className="relative inline-block text-left">
+                    <select
+                      value={job.status}
+                      onChange={(e) =>
+                        statusMutation.mutate({ id: job._id, status: e.target.value })
+                      }
+                      disabled={statusMutation.isPending}
+                      aria-label={`Status for ${job.title}`}
+                      className="min-h-[44px] appearance-none bg-surface border border-border text-text text-xs font-bold py-2 pl-3 pr-7 rounded-sm hover:bg-sand/30 focus:outline-none focus:ring-2 focus:ring-brand-dark cursor-pointer disabled:opacity-50 transition-all"
+                    >
+                      <option value="open">Status: Open</option>
+                      <option value="draft">Status: Draft</option>
+                      <option value="closed">Status: Closed</option>
+                    </select>
+                    <ChevronDown className="w-3.5 h-3.5 text-text-muted absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  </div>
+
+                  {/* Edit */}
+                  <Link
+                    to={`/recruiter/jobs/${job._id}/edit`}
+                    className="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-sm border border-border text-text hover:bg-sand transition-colors"
+                    title="Edit Job Posting"
+                    aria-label={`Edit ${job.title}`}
                   >
-                    <option value="open">Status: Open</option>
-                    <option value="draft">Status: Draft</option>
-                    <option value="closed">Status: Closed</option>
-                  </select>
-                  <ChevronDown className="w-3.5 h-3.5 text-text-muted absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <Edit3 className="w-4 h-4" />
+                  </Link>
+
+                  {/* View on Public Portal */}
+                  <Link
+                    to={`/jobs/${job._id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-sm border border-border text-text hover:bg-sand transition-colors"
+                    title="View Public Listing"
+                    aria-label={`View public listing for ${job.title}`}
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                  </Link>
+
+                  {/* Delete */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (window.confirm(`Are you sure you want to delete "${job.title}"?`)) {
+                        deleteMutation.mutate(job._id);
+                      }
+                    }}
+                    disabled={deleteMutation.isPending}
+                    className="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-sm border border-error text-error hover:bg-error-bg transition-colors cursor-pointer"
+                    title="Delete Job"
+                    aria-label={`Delete ${job.title}`}
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
                 </div>
-
-                {/* Edit */}
-                <Link
-                  to={`/recruiter/jobs/${job._id}/edit`}
-                  className="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-sm border border-border text-text hover:bg-sand transition-colors"
-                  title="Edit Job Posting"
-                  aria-label={`Edit ${job.title}`}
-                >
-                  <Edit3 className="w-4 h-4" />
-                </Link>
-
-                {/* View on Public Portal */}
-                <Link
-                  to={`/jobs/${job._id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-sm border border-border text-text hover:bg-sand transition-colors"
-                  title="View Public Listing"
-                  aria-label={`View public listing for ${job.title}`}
-                >
-                  <ExternalLink className="w-4 h-4" />
-                </Link>
-
-                {/* Delete */}
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (window.confirm(`Are you sure you want to delete "${job.title}"?`)) {
-                      deleteMutation.mutate(job._id);
-                    }
-                  }}
-                  disabled={deleteMutation.isPending}
-                  className="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-sm border border-error text-error hover:bg-error-bg transition-colors cursor-pointer"
-                  title="Delete Job"
-                  aria-label={`Delete ${job.title}`}
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
               </div>
             </div>
           ))}

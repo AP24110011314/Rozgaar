@@ -58,33 +58,33 @@ export function ResetPasswordPage() {
   };
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-page">
-      <GlassCard className="max-w-md w-full space-y-6 p-8 sm:p-10 bg-surface border-2 border-border rounded-lg shadow-flat">
+    <div className="min-h-[85vh] flex items-center justify-center py-6 sm:py-12 px-3 sm:px-6 lg:px-8 bg-page">
+      <GlassCard className="max-w-md w-full space-y-6 p-4 sm:p-8 md:p-10 bg-surface border-2 border-border rounded-lg shadow-flat">
         <div className="text-center">
-          <div className="mx-auto w-14 h-14 rounded-md bg-brand-dark text-white flex items-center justify-center border border-brand shadow-flat">
-            <Lock className="w-7 h-7 text-white" aria-hidden="true" />
+          <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 rounded-md bg-brand-dark text-white flex items-center justify-center border border-brand shadow-flat">
+            <Lock className="w-6 h-6 sm:w-7 sm:h-7 text-white" aria-hidden="true" />
           </div>
-          <h1 className="mt-4 text-2xl sm:text-3xl font-extrabold tracking-tight text-text">
+          <h1 className="mt-4 text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-text">
             Reset Password
           </h1>
-          <p className="mt-2 text-sm font-medium text-text-muted">
+          <p className="mt-2 text-xs sm:text-sm font-medium text-text-muted">
             Enter your new secure password below
           </p>
         </div>
 
         {isSuccess ? (
           <div className="p-4 rounded-md bg-mint border-2 border-mint-text text-mint-text space-y-3 font-medium">
-            <div className="flex items-center space-x-2 text-base font-bold">
+            <div className="flex items-center space-x-2 text-sm sm:text-base font-bold">
               <CheckCircle2 className="w-5 h-5 text-mint-text shrink-0" aria-hidden="true" />
               <span>Password Reset Successful!</span>
             </div>
-            <p className="text-sm leading-relaxed text-mint-text font-medium">
+            <p className="text-xs sm:text-sm leading-relaxed text-mint-text font-medium">
               Your password has been updated. Redirecting you to sign in...
             </p>
             <div className="pt-2">
               <Link
                 to="/login"
-                className="inline-flex items-center text-sm font-bold text-brand-dark hover:underline min-h-[44px]"
+                className="inline-flex items-center text-xs sm:text-sm font-bold text-brand-dark hover:underline min-h-[44px]"
               >
                 Sign in now <ArrowRight className="w-4 h-4 ml-1" aria-hidden="true" />
               </Link>
@@ -95,7 +95,7 @@ export function ResetPasswordPage() {
             {serverError && (
               <div
                 role="alert"
-                className="p-3.5 rounded-md bg-error-bg border-2 border-error flex items-start space-x-3 text-error text-sm font-bold"
+                className="p-3.5 rounded-md bg-error-bg border-2 border-error flex items-start space-x-3 text-error text-xs sm:text-sm font-bold"
               >
                 <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-error" aria-hidden="true" />
                 <span>{serverError}</span>
@@ -104,7 +104,7 @@ export function ResetPasswordPage() {
 
             {!tokenFromUrl && (
               <div>
-                <label htmlFor="token" className="block text-sm font-bold text-text">
+                <label htmlFor="token" className="block text-xs sm:text-sm font-bold text-text">
                   Reset Token
                 </label>
                 <div className="mt-1">
@@ -113,7 +113,7 @@ export function ResetPasswordPage() {
                     type="text"
                     aria-invalid={!!errors.token}
                     {...register('token')}
-                    className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-md border-2 text-text placeholder-text-muted bg-surface focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
+                    className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-md border-2 text-base text-text placeholder-text-muted bg-surface focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
                       errors.token ? 'border-error bg-error-bg' : 'border-border'
                     }`}
                     placeholder="Paste the reset token from your email"
@@ -126,7 +126,7 @@ export function ResetPasswordPage() {
             )}
 
             <div>
-              <label htmlFor="password" className="block text-sm font-bold text-text">
+              <label htmlFor="password" className="block text-xs sm:text-sm font-bold text-text">
                 New Password
               </label>
               <div className="mt-1">
@@ -136,7 +136,7 @@ export function ResetPasswordPage() {
                   autoComplete="new-password"
                   aria-invalid={!!errors.password}
                   {...register('password')}
-                  className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-md border-2 text-text placeholder-text-muted bg-surface focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
+                  className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-md border-2 text-base text-text placeholder-text-muted bg-surface focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
                     errors.password ? 'border-error bg-error-bg' : 'border-border'
                   }`}
                   placeholder="Min 8 characters"
@@ -148,7 +148,7 @@ export function ResetPasswordPage() {
             </div>
 
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-bold text-text">
+              <label htmlFor="confirmPassword" className="block text-xs sm:text-sm font-bold text-text">
                 Confirm New Password
               </label>
               <div className="mt-1">
@@ -158,7 +158,7 @@ export function ResetPasswordPage() {
                   autoComplete="new-password"
                   aria-invalid={!!errors.confirmPassword}
                   {...register('confirmPassword')}
-                  className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-md border-2 text-text placeholder-text-muted bg-surface focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
+                  className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-md border-2 text-base text-text placeholder-text-muted bg-surface focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
                     errors.confirmPassword ? 'border-error bg-error-bg' : 'border-border'
                   }`}
                   placeholder="Repeat new password"
@@ -173,7 +173,7 @@ export function ResetPasswordPage() {
               type="submit"
               variant="primary"
               disabled={isSubmitting}
-              className="w-full flex justify-center items-center"
+              className="w-full flex justify-center items-center min-h-[44px]"
             >
               {isSubmitting ? (
                 <>

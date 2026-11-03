@@ -130,10 +130,10 @@ export function CompanyProfilePage() {
   const members = company?.members || [];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 text-left">
+    <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-5 sm:space-y-8 text-left">
       {/* Header Strip */}
-      <div className="bg-sand border-b-2 border-brand p-5 rounded-md">
-        <h1 className="text-2xl sm:text-3xl font-bold text-text">Company Profile & Team</h1>
+      <div className="bg-sand border-b-2 border-brand p-4 sm:p-5 rounded-md">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-text">Company Profile & Team</h1>
         <p className="text-xs text-text-muted mt-1">
           Manage your organization's public branding, contact info, and team permissions.
         </p>
@@ -158,7 +158,7 @@ export function CompanyProfilePage() {
       )}
 
       {/* 1. Company Profile Form */}
-      <div className="bg-surface border border-border rounded-md p-6 sm:p-8 space-y-6 shadow-flat">
+      <div className="bg-surface border border-border rounded-md p-4 sm:p-6 md:p-8 space-y-6 shadow-flat">
         <form onSubmit={handleSaveCompany} className="space-y-6">
           <div className="flex items-center space-x-3 pb-4 border-b border-divider">
             <div className="w-10 h-10 rounded-sm bg-sand text-text flex items-center justify-center border border-border">
@@ -246,6 +246,7 @@ export function CompanyProfilePage() {
               type="submit"
               variant="primary"
               disabled={updateMutation.isPending}
+              className="w-full sm:w-auto justify-center min-h-[44px]"
             >
               {updateMutation.isPending ? 'Saving...' : 'Save Company Details'}
             </GlassButton>
@@ -254,7 +255,7 @@ export function CompanyProfilePage() {
       </div>
 
       {/* 2. Team Members Section */}
-      <div className="bg-surface border border-border rounded-md p-6 sm:p-8 space-y-6 shadow-flat">
+      <div className="bg-surface border border-border rounded-md p-4 sm:p-6 md:p-8 space-y-6 shadow-flat">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-4 border-b border-divider">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 rounded-sm bg-sand text-text flex items-center justify-center border border-border">

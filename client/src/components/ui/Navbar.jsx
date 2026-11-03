@@ -106,22 +106,22 @@ export function Navbar() {
         Skip to main content
       </a>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo & Brand */}
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-3 sm:space-x-6 min-w-0">
             <Link
               to="/"
-              className="flex items-center space-x-3 text-text no-underline focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus rounded-sm p-1"
+              className="flex items-center space-x-2 sm:space-x-3 text-text no-underline focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus rounded-sm p-1 shrink-0"
             >
-              <div className="w-10 h-10 rounded-md bg-brand-dark flex items-center justify-center text-white font-bold border border-brand shrink-0">
-                <Briefcase className="w-5 h-5 text-white" aria-hidden="true" />
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-md bg-brand-dark flex items-center justify-center text-white font-bold border border-brand shrink-0">
+                <Briefcase className="w-4.5 h-4.5 sm:w-5 sm:h-5 text-white" aria-hidden="true" />
               </div>
               <div className="flex flex-col text-left">
-                <span className="text-xl font-extrabold tracking-tight text-text leading-none">
+                <span className="text-lg sm:text-xl font-extrabold tracking-tight text-text leading-none whitespace-nowrap">
                   रोज़गार <span className="text-brand-dark">Rozgaar</span>
                 </span>
-                <span className="text-xs text-text-muted tracking-wider uppercase font-bold mt-0.5">
+                <span className="text-[10px] sm:text-xs text-text-muted tracking-wider uppercase font-bold mt-0.5 hidden xs:inline sm:inline">
                   Official ATS Portal
                 </span>
               </div>
@@ -246,17 +246,17 @@ export function Navbar() {
           </div>
 
           {/* Mobile hamburger & notification bell */}
-          <div className="flex items-center space-x-2 md:hidden">
+          <div className="flex items-center space-x-1.5 sm:space-x-2 md:hidden shrink-0">
             {isAuthenticated && <NotificationBell />}
             <button
               ref={menuButtonRef}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-md bg-surface border-2 border-border text-text hover:bg-sand min-h-[44px] min-w-[44px] flex items-center justify-center focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus cursor-pointer"
+              className="p-2 sm:p-2.5 rounded-md bg-surface border-2 border-border text-text hover:bg-sand min-h-[44px] min-w-[44px] flex items-center justify-center focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus cursor-pointer"
               aria-label="Toggle navigation menu"
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-nav-panel"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6 text-text" aria-hidden="true" /> : <Menu className="w-6 h-6 text-text" aria-hidden="true" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6 text-text" aria-hidden="true" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-text" aria-hidden="true" />}
             </button>
           </div>
         </div>
@@ -276,7 +276,7 @@ export function Navbar() {
           <div
             id="mobile-nav-panel"
             ref={drawerRef}
-            className="relative w-4/5 max-w-sm h-full bg-sand border-l-2 border-brand p-5 flex flex-col justify-between shadow-2xl z-10 overflow-y-auto text-left"
+            className="relative w-[85vw] max-w-xs sm:max-w-sm h-full bg-sand border-l-2 border-brand p-4 sm:p-5 flex flex-col justify-between shadow-2xl z-10 overflow-y-auto text-left"
           >
             <div>
               {/* Drawer Header */}

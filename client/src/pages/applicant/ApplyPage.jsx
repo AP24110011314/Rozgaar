@@ -191,12 +191,12 @@ export function ApplyPage() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 text-left">
+    <div className="max-w-3xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-4 sm:space-y-6 text-left">
       {/* Back Link & Title Band */}
-      <div className="bg-sand border-b-2 border-brand p-4 rounded-md flex items-center justify-between">
+      <div className="bg-sand border-b-2 border-brand p-3.5 sm:p-4 rounded-md flex items-center justify-between">
         <Link
           to={`/jobs/${jobId}`}
-          className="inline-flex items-center text-xs font-bold text-brand-dark hover:underline"
+          className="inline-flex items-center text-xs font-bold text-brand-dark hover:underline min-h-[44px]"
         >
           <ArrowLeft className="w-4 h-4 mr-1.5" /> Back to job listing
         </Link>
@@ -204,13 +204,13 @@ export function ApplyPage() {
       </div>
 
       {/* Main Form Card */}
-      <div className="bg-surface border border-border rounded-md p-6 sm:p-8 space-y-6 shadow-flat">
+      <div className="bg-surface border border-border rounded-md p-4 sm:p-6 md:p-8 space-y-6 shadow-flat">
         {/* Header */}
-        <div className="border-b border-divider pb-6 space-y-2">
+        <div className="border-b border-divider pb-4 sm:pb-6 space-y-2">
           <GlassBadge variant="saffron">Application Submission</GlassBadge>
-          <h1 className="text-2xl font-bold text-text">{job.title}</h1>
-          <p className="text-sm font-medium text-text-muted flex items-center">
-            <Building2 className="w-4 h-4 mr-1.5 text-brand" />
+          <h1 className="text-xl sm:text-2xl font-bold text-text">{job.title}</h1>
+          <p className="text-xs sm:text-sm font-medium text-text-muted flex items-center">
+            <Building2 className="w-4 h-4 mr-1.5 text-brand shrink-0" />
             {job.company?.name} • {job.location?.city}, {job.location?.state}
           </p>
         </div>
@@ -332,14 +332,14 @@ export function ApplyPage() {
           </div>
 
           {/* Submit Button */}
-          <div className="pt-2 flex justify-end space-x-3">
-            <Link to={`/jobs/${jobId}`} className="glass-btn-secondary text-sm px-5 py-2.5">
+          <div className="pt-2 flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-3 sm:space-x-3">
+            <Link to={`/jobs/${jobId}`} className="glass-btn-secondary text-sm px-5 py-2.5 min-h-[44px] flex items-center justify-center w-full sm:w-auto">
               Cancel
             </Link>
             <button
               type="submit"
               disabled={applyMutation.isPending || !selectedResumeId || !consentGiven}
-              className="glass-btn-primary text-sm px-6 py-2.5"
+              className="glass-btn-primary text-sm px-6 py-2.5 min-h-[44px] flex items-center justify-center w-full sm:w-auto"
             >
               {applyMutation.isPending ? (
                 <>

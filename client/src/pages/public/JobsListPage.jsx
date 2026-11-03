@@ -147,7 +147,7 @@ export function JobsListPage() {
   const activeFiltersCount = (type ? 1 : 0) + (remote ? 1 : 0) + (minSalary ? 1 : 0) + (coords ? 1 : 0);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 text-left">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-4 sm:space-y-6 text-left">
       {/* Title Strip */}
       <div className="bg-sand border-b-2 border-brand p-4 sm:p-5 rounded-md">
         <h1 className="text-xl sm:text-2xl font-bold text-text">Find Verified Local Jobs</h1>

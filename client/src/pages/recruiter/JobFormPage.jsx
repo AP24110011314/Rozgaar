@@ -216,9 +216,9 @@ export function JobFormPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 text-left">
+    <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-4 sm:space-y-6 text-left">
       {/* Top breadcrumb & strip */}
-      <div className="bg-sand border-b-2 border-brand p-5 rounded-md">
+      <div className="bg-sand border-b-2 border-brand p-4 sm:p-5 rounded-md">
         <Link
           to="/recruiter/jobs"
           className="inline-flex items-center text-xs font-bold text-brand-dark hover:underline min-h-[44px]"
@@ -226,7 +226,7 @@ export function JobFormPage() {
           <ArrowLeft className="w-4 h-4 mr-1.5" />
           Back to My Job Postings
         </Link>
-        <h1 className="text-2xl sm:text-3xl font-bold text-text mt-1">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-text mt-1">
           {isEditing ? 'Edit Job Posting' : 'Post a New Job'}
         </h1>
         <p className="text-xs text-text-muted mt-1">
@@ -491,7 +491,7 @@ export function JobFormPage() {
         </div>
 
         {/* Flexible Custom Fields */}
-        <div className="bg-surface border border-border rounded-md p-6 space-y-4 shadow-flat">
+        <div className="bg-surface border border-border rounded-md p-4 sm:p-6 space-y-4 shadow-flat">
           <div className="flex items-center justify-between border-b border-divider pb-3">
             <div>
               <h2 className="text-base font-bold text-text">Custom Attributes</h2>
@@ -504,6 +504,7 @@ export function JobFormPage() {
               variant="secondary"
               size="sm"
               onClick={handleAddCustomField}
+              className="min-h-[44px]"
             >
               <Plus className="w-3.5 h-3.5 mr-1" />
               Add Field
@@ -512,25 +513,25 @@ export function JobFormPage() {
 
           <div className="space-y-3">
             {customFields.map((cf, idx) => (
-              <div key={idx} className="flex items-center gap-3">
+              <div key={idx} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
                 <input
                   type="text"
                   value={cf.key}
                   onChange={(e) => handleCustomFieldChange(idx, 'key', e.target.value)}
                   placeholder="Attribute name (e.g. Shift Timing)"
-                  className="glass-input w-1/3"
+                  className="glass-input w-full sm:w-1/3 min-h-[44px]"
                 />
                 <input
                   type="text"
                   value={cf.value}
                   onChange={(e) => handleCustomFieldChange(idx, 'value', e.target.value)}
                   placeholder="Value (e.g. 9:00 AM - 6:00 PM, Mon-Sat)"
-                  className="glass-input flex-1"
+                  className="glass-input w-full sm:flex-1 min-h-[44px]"
                 />
                 <button
                   type="button"
                   onClick={() => handleRemoveCustomField(idx)}
-                  className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center text-text-muted hover:text-error rounded-sm hover:bg-error-bg cursor-pointer transition-colors"
+                  className="self-end sm:self-auto p-2 min-h-[44px] min-w-[44px] flex items-center justify-center text-text-muted hover:text-error rounded-sm hover:bg-error-bg cursor-pointer transition-colors"
                   title="Remove Attribute"
                   aria-label="Remove attribute"
                 >
@@ -542,9 +543,9 @@ export function JobFormPage() {
         </div>
 
         {/* Submit Actions */}
-        <div className="flex items-center justify-end space-x-4 pt-4 border-t border-divider">
-          <Link to="/recruiter/jobs">
-            <GlassButton variant="secondary" size="md">
+        <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-3 sm:space-x-4 pt-4 border-t border-divider">
+          <Link to="/recruiter/jobs" className="w-full sm:w-auto">
+            <GlassButton variant="secondary" size="md" className="w-full justify-center min-h-[44px]">
               Cancel
             </GlassButton>
           </Link>
@@ -553,6 +554,7 @@ export function JobFormPage() {
             variant="primary"
             size="md"
             disabled={saveMutation.isPending}
+            className="w-full sm:w-auto justify-center min-h-[44px]"
           >
             {saveMutation.isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
             {isEditing ? 'Save Changes' : 'Publish Job Listing'}

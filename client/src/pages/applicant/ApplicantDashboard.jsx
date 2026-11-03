@@ -77,9 +77,9 @@ export function ApplicantDashboard() {
   });
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8 text-left">
+    <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-4 sm:space-y-6 text-left">
       {/* Top Banner */}
-      <div className="bg-sand border-b-2 border-brand p-4 sm:p-5 rounded-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-sand border-b-2 border-brand p-4 sm:p-5 rounded-md flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold text-text">
             Candidate Application Tracking
@@ -88,45 +88,45 @@ export function ApplicantDashboard() {
             Track your verified local job applications on our live anti-ghosting timeline.
           </p>
         </div>
-        <Link to="/jobs" className="glass-btn-primary text-xs px-5 py-2.5 self-start sm:self-auto flex items-center min-h-[44px]">
+        <Link to="/jobs" className="glass-btn-primary text-xs px-4 sm:px-5 py-2.5 flex items-center justify-center min-h-[44px] w-full sm:w-auto">
           <Search className="w-4 h-4 mr-1.5" /> Explore More Jobs
         </Link>
       </div>
 
       {/* Summary Stat Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        <div className="bg-surface border border-border rounded-md p-4 sm:p-5 text-center shadow-flat">
-          <p className="text-2xl sm:text-3xl font-extrabold text-brand-dark">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
+        <div className="bg-surface border border-border rounded-md p-3.5 sm:p-5 text-center shadow-flat">
+          <p className="text-xl sm:text-3xl font-extrabold text-brand-dark">
             {totalApplied}
           </p>
-          <p className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-text-muted mt-1">
+          <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-text-muted mt-0.5 sm:mt-1">
             Total Applications
           </p>
         </div>
 
-        <div className="bg-surface border border-border rounded-md p-4 sm:p-5 text-center shadow-flat">
-          <p className="text-2xl sm:text-3xl font-extrabold text-text">
+        <div className="bg-surface border border-border rounded-md p-3.5 sm:p-5 text-center shadow-flat">
+          <p className="text-xl sm:text-3xl font-extrabold text-text">
             {inReview}
           </p>
-          <p className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-text-muted mt-1">
+          <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-text-muted mt-0.5 sm:mt-1">
             Under Review
           </p>
         </div>
 
-        <div className="bg-surface border border-border rounded-md p-4 sm:p-5 text-center shadow-flat">
-          <p className="text-2xl sm:text-3xl font-extrabold text-text">
+        <div className="bg-surface border border-border rounded-md p-3.5 sm:p-5 text-center shadow-flat">
+          <p className="text-xl sm:text-3xl font-extrabold text-text">
             {interviews}
           </p>
-          <p className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-text-muted mt-1">
+          <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-text-muted mt-0.5 sm:mt-1">
             Interviewing
           </p>
         </div>
 
-        <div className="bg-surface border border-border rounded-md p-4 sm:p-5 text-center shadow-flat">
-          <p className="text-2xl sm:text-3xl font-extrabold text-brand-dark">
+        <div className="bg-surface border border-border rounded-md p-3.5 sm:p-5 text-center shadow-flat">
+          <p className="text-xl sm:text-3xl font-extrabold text-brand-dark">
             {offers}
           </p>
-          <p className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-text-muted mt-1">
+          <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-text-muted mt-0.5 sm:mt-1">
             Offers & Hired
           </p>
         </div>
@@ -219,7 +219,7 @@ export function ApplicantDashboard() {
                   )}
                 </div>
 
-                <div className="flex items-center space-x-3 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-divider">
+                <div className="flex items-center shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-divider w-full sm:w-auto">
                   <Link
                     to={`/me/applications/${app._id}`}
                     className="glass-btn-secondary text-xs px-4 py-2 min-h-[44px] flex items-center w-full sm:w-auto justify-center"

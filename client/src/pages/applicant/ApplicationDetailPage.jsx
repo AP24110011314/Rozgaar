@@ -166,12 +166,12 @@ export function ApplicationDetailPage() {
   const stageHistory = application.stageHistory || [];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 text-left">
+    <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-4 sm:space-y-6 text-left">
       {/* Back Link & Title Band */}
-      <div className="bg-sand border-b-2 border-brand p-4 rounded-md flex items-center justify-between">
+      <div className="bg-sand border-b-2 border-brand p-3.5 sm:p-4 rounded-md flex items-center justify-between">
         <Link
           to="/me/applications"
-          className="inline-flex items-center text-xs font-bold text-brand-dark hover:underline"
+          className="inline-flex items-center text-xs font-bold text-brand-dark hover:underline min-h-[44px]"
         >
           <ArrowLeft className="w-4 h-4 mr-1.5" /> Back to My Applications
         </Link>
@@ -179,7 +179,7 @@ export function ApplicationDetailPage() {
       </div>
 
       {/* Header Card */}
-      <div className="bg-surface border border-border rounded-md p-6 sm:p-8 space-y-6 shadow-flat">
+      <div className="bg-surface border border-border rounded-md p-4 sm:p-6 md:p-8 space-y-6 shadow-flat">
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-6 border-b border-divider">
           <div className="space-y-2 flex-1">
             <div className="flex flex-wrap items-center gap-2">
@@ -193,12 +193,12 @@ export function ApplicationDetailPage() {
               )}
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-bold text-text">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-text">
               {application.job?.title || 'Position'}
             </h1>
 
-            <p className="text-sm font-medium text-text-muted flex items-center">
-              <Building2 className="w-4 h-4 mr-1.5 text-brand" />
+            <p className="text-xs sm:text-sm font-medium text-text-muted flex items-center">
+              <Building2 className="w-4 h-4 mr-1.5 text-brand shrink-0" />
               {application.company?.name || 'Local Company'} • Applied on{' '}
               {new Date(application.createdAt).toLocaleDateString('en-IN', {
                 month: 'short',
@@ -209,19 +209,19 @@ export function ApplicationDetailPage() {
           </div>
 
           {/* Action buttons */}
-          <div className="flex items-center space-x-3 shrink-0">
+          <div className="flex flex-col xs:flex-row items-stretch xs:items-center gap-2 sm:gap-3 shrink-0 w-full sm:w-auto">
             {application.stage !== 'withdrawn' && application.stage !== 'hired' && (
               <button
                 type="button"
                 onClick={() => setWithdrawModalOpen(true)}
-                className="px-4 py-2 rounded-sm text-xs font-bold text-error bg-error-bg border border-error hover:bg-error hover:text-white min-h-[44px] transition-all cursor-pointer"
+                className="px-4 py-2 rounded-sm text-xs font-bold text-error bg-error-bg border border-error hover:bg-error hover:text-white min-h-[44px] transition-all cursor-pointer w-full sm:w-auto text-center"
               >
                 Withdraw Application
               </button>
             )}
             <Link
               to={`/jobs/${application.job?._id || application.job}`}
-              className="glass-btn-secondary text-xs px-4 py-2 min-h-[44px] flex items-center"
+              className="glass-btn-secondary text-xs px-4 py-2 min-h-[44px] flex items-center justify-center w-full sm:w-auto"
             >
               View Listing <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
             </Link>

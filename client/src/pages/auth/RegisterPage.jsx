@@ -91,52 +91,52 @@ export function RegisterPage() {
   };
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-page">
-      <GlassCard className="max-w-lg w-full space-y-8 p-8 sm:p-10 bg-surface border-2 border-border rounded-lg shadow-flat">
+    <div className="min-h-[85vh] flex items-center justify-center py-6 sm:py-12 px-3 sm:px-6 lg:px-8 bg-page">
+      <GlassCard className="max-w-lg w-full space-y-6 sm:space-y-8 p-4 sm:p-8 md:p-10 bg-surface border-2 border-border rounded-lg shadow-flat">
         <div className="text-center">
-          <div className="mx-auto w-14 h-14 rounded-md bg-brand-dark flex items-center justify-center text-white border border-brand shadow-flat">
-            <Briefcase className="w-7 h-7 text-white" aria-hidden="true" />
+          <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 rounded-md bg-brand-dark flex items-center justify-center text-white border border-brand shadow-flat">
+            <Briefcase className="w-6 h-6 sm:w-7 sm:h-7 text-white" aria-hidden="true" />
           </div>
-          <h1 className="mt-4 text-2xl sm:text-3xl font-extrabold tracking-tight text-text">
+          <h1 className="mt-4 text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-text">
             Create your Rozgaar Account
           </h1>
-          <p className="mt-2 text-sm font-medium text-text-muted">
+          <p className="mt-2 text-xs sm:text-sm font-medium text-text-muted">
             Join the community-first hiring network for local businesses and candidates
           </p>
         </div>
 
         {/* Role Selector Tabs */}
-        <div className="grid grid-cols-2 gap-2 p-1.5 bg-sand border-2 border-border rounded-md">
+        <div className="grid grid-cols-2 gap-1.5 sm:gap-2 p-1.5 bg-sand border-2 border-border rounded-md">
           <button
             type="button"
             onClick={() => handleRoleChange('applicant')}
-            className={`flex items-center justify-center min-h-[44px] py-2 px-3 rounded-sm text-sm font-bold transition-all cursor-pointer focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
+            className={`flex items-center justify-center min-h-[44px] py-2 px-2 sm:px-3 rounded-sm text-xs sm:text-sm font-bold transition-all cursor-pointer focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
               selectedRole === 'applicant'
                 ? 'bg-brand-dark text-white shadow-flat'
                 : 'text-text hover:underline'
             }`}
           >
-            <UserCheck className="w-4 h-4 mr-2" aria-hidden="true" />
-            Job Seeker (प्रार्थी)
+            <UserCheck className="w-4 h-4 mr-1.5 shrink-0" aria-hidden="true" />
+            <span className="truncate">Job Seeker <span className="opacity-80 font-normal hidden xs:inline">(प्रार्थी)</span></span>
           </button>
           <button
             type="button"
             onClick={() => handleRoleChange('recruiter')}
-            className={`flex items-center justify-center min-h-[44px] py-2 px-3 rounded-sm text-sm font-bold transition-all cursor-pointer focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
+            className={`flex items-center justify-center min-h-[44px] py-2 px-2 sm:px-3 rounded-sm text-xs sm:text-sm font-bold transition-all cursor-pointer focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
               selectedRole === 'recruiter'
                 ? 'bg-brand-dark text-white shadow-flat'
                 : 'text-text hover:underline'
             }`}
           >
-            <Building2 className="w-4 h-4 mr-2" aria-hidden="true" />
-            Employer (नियोक्ता)
+            <Building2 className="w-4 h-4 mr-1.5 shrink-0" aria-hidden="true" />
+            <span className="truncate">Employer <span className="opacity-80 font-normal hidden xs:inline">(नियोक्ता)</span></span>
           </button>
         </div>
 
         {serverError && (
           <div
             role="alert"
-            className="p-3.5 rounded-md bg-error-bg border-2 border-error flex items-start space-x-3 text-error text-sm font-bold"
+            className="p-3.5 rounded-md bg-error-bg border-2 border-error flex items-start space-x-3 text-error text-xs sm:text-sm font-bold"
           >
             <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-error" aria-hidden="true" />
             <span>{serverError}</span>
@@ -147,7 +147,7 @@ export function RegisterPage() {
           <input type="hidden" {...register('role')} />
 
           <div>
-            <label htmlFor="name" className="block text-sm font-bold text-text">
+            <label htmlFor="name" className="block text-xs sm:text-sm font-bold text-text">
               Full Name
             </label>
             <div className="mt-1">
@@ -157,7 +157,7 @@ export function RegisterPage() {
                 autoComplete="name"
                 aria-invalid={!!errors.name}
                 {...register('name')}
-                className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-md border-2 text-text placeholder-text-muted bg-surface focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
+                className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-md border-2 text-base text-text placeholder-text-muted bg-surface focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
                   errors.name ? 'border-error bg-error-bg' : 'border-border'
                 }`}
                 placeholder="e.g. Priya Sharma"
@@ -168,7 +168,7 @@ export function RegisterPage() {
 
           {selectedRole === 'recruiter' && (
             <div>
-              <label htmlFor="companyName" className="block text-sm font-bold text-text">
+              <label htmlFor="companyName" className="block text-xs sm:text-sm font-bold text-text">
                 Company Name
               </label>
               <div className="mt-1">
@@ -178,7 +178,7 @@ export function RegisterPage() {
                   autoComplete="organization"
                   aria-invalid={!!errors.companyName}
                   {...register('companyName')}
-                  className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-md border-2 text-text placeholder-text-muted bg-surface focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
+                  className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-md border-2 text-base text-text placeholder-text-muted bg-surface focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
                     errors.companyName ? 'border-error bg-error-bg' : 'border-border'
                   }`}
                   placeholder="e.g. Sunrise Diagnostics"
@@ -191,7 +191,7 @@ export function RegisterPage() {
           )}
 
           <div>
-            <label htmlFor="email" className="block text-sm font-bold text-text">
+            <label htmlFor="email" className="block text-xs sm:text-sm font-bold text-text">
               Email address
             </label>
             <div className="mt-1">
@@ -201,7 +201,7 @@ export function RegisterPage() {
                 autoComplete="email"
                 aria-invalid={!!errors.email}
                 {...register('email')}
-                className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-md border-2 text-text placeholder-text-muted bg-surface focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
+                className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-md border-2 text-base text-text placeholder-text-muted bg-surface focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
                   errors.email ? 'border-error bg-error-bg' : 'border-border'
                 }`}
                 placeholder="priya@example.com"
@@ -212,7 +212,7 @@ export function RegisterPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="password" className="block text-sm font-bold text-text">
+              <label htmlFor="password" className="block text-xs sm:text-sm font-bold text-text">
                 Password
               </label>
               <div className="mt-1">
@@ -222,7 +222,7 @@ export function RegisterPage() {
                   autoComplete="new-password"
                   aria-invalid={!!errors.password}
                   {...register('password')}
-                  className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-md border-2 text-text placeholder-text-muted bg-surface focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
+                  className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-md border-2 text-base text-text placeholder-text-muted bg-surface focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
                     errors.password ? 'border-error bg-error-bg' : 'border-border'
                   }`}
                   placeholder="Min 8 characters"
@@ -234,7 +234,7 @@ export function RegisterPage() {
             </div>
 
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-bold text-text">
+              <label htmlFor="confirmPassword" className="block text-xs sm:text-sm font-bold text-text">
                 Confirm Password
               </label>
               <div className="mt-1">
@@ -244,7 +244,7 @@ export function RegisterPage() {
                   autoComplete="new-password"
                   aria-invalid={!!errors.confirmPassword}
                   {...register('confirmPassword')}
-                  className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-md border-2 text-text placeholder-text-muted bg-surface focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
+                  className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-md border-2 text-base text-text placeholder-text-muted bg-surface focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-focus ${
                     errors.confirmPassword ? 'border-error bg-error-bg' : 'border-border'
                   }`}
                   placeholder="Repeat password"
@@ -264,7 +264,7 @@ export function RegisterPage() {
                 type="checkbox"
                 aria-invalid={!!errors.privacyConsent}
                 {...register('privacyConsent')}
-                className="h-5 w-5 mt-0.5 accent-brand-dark rounded cursor-pointer"
+                className="h-5 w-5 mt-0.5 accent-brand-dark rounded cursor-pointer shrink-0"
               />
               <label htmlFor="privacyConsent" className="ml-2.5 block text-xs font-bold text-text leading-relaxed cursor-pointer">
                 I agree to Rozgaar's privacy terms. I understand Rozgaar never requests or stores sensitive demographic fields (age, photo, gender, or marital status) and protects applicant privacy by design.
@@ -280,7 +280,7 @@ export function RegisterPage() {
               type="submit"
               variant="primary"
               disabled={isSubmitting}
-              className="w-full flex justify-center items-center"
+              className="w-full flex justify-center items-center min-h-[44px]"
             >
               {isSubmitting ? (
                 <>
@@ -298,7 +298,7 @@ export function RegisterPage() {
         </form>
 
         <div className="text-center pt-4 border-t border-divider">
-          <p className="text-sm font-medium text-text">
+          <p className="text-xs sm:text-sm font-medium text-text">
             Already registered?{' '}
             <Link to="/login" className="font-bold text-brand-dark hover:underline min-h-[44px] inline-flex items-center">
               Log in to your account

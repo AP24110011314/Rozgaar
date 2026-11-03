@@ -46,7 +46,7 @@ export function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <AuthProvider>
-          <div className="min-h-dvh flex flex-col bg-page text-text font-sans antialiased text-base pb-20 sm:pb-0">
+          <div className="min-h-dvh flex flex-col bg-page text-text font-sans antialiased text-base pb-[calc(5rem+env(safe-area-inset-bottom,0px))] sm:pb-0">
             {/* Accessible Skip Link */}
             <a
               href="#main-content"

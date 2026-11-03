@@ -384,21 +384,21 @@ export function RecruiterKanbanPage() {
   return (
     <div className="h-[calc(100dvh-4.5rem)] flex flex-col overflow-hidden relative text-left">
       {/* Top Header / Navigation Strip */}
-      <div className="bg-sand border-b-2 border-brand px-4 sm:px-6 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 shrink-0 z-10">
-        <div className="flex items-center space-x-3">
+      <div className="bg-sand border-b-2 border-brand px-3 sm:px-6 py-2.5 sm:py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 sm:gap-3 shrink-0 z-10">
+        <div className="flex items-center space-x-2.5 sm:space-x-3">
           <Link
             to="/recruiter/jobs"
-            className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-sm border border-border text-text hover:bg-surface transition-colors"
+            className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-sm border border-border text-text hover:bg-surface transition-colors shrink-0"
             title="Back to all jobs"
             aria-label="Back to all jobs"
           >
             <ArrowLeft className="w-4 h-4" />
           </Link>
-          <div>
-            <h1 className="text-base sm:text-lg font-bold text-text leading-tight">
+          <div className="truncate">
+            <h1 className="text-base sm:text-lg font-bold text-text leading-tight truncate">
               {job?.title || 'Candidate Pipeline'}
             </h1>
-            <p className="text-xs text-text-muted">
+            <p className="text-xs text-text-muted truncate">
               {job?.location?.city ? `${job.location.city} • ` : ''}
               {applications?.length || 0} candidate{applications?.length === 1 ? '' : 's'}
             </p>
@@ -406,7 +406,7 @@ export function RecruiterKanbanPage() {
         </div>
 
         {/* Search & Rating Filter Controls */}
-        <div className="flex items-center space-x-2 sm:space-x-3">
+        <div className="flex items-center space-x-2 sm:space-x-3 w-full sm:w-auto">
           <div className="relative flex-1 sm:flex-none">
             <Search className="w-4 h-4 text-text-muted absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
@@ -415,7 +415,7 @@ export function RecruiterKanbanPage() {
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search candidate..."
               aria-label="Search candidates"
-              className="pl-9 pr-3 py-1.5 min-h-[44px] rounded-sm border border-border text-xs w-full sm:w-64 bg-surface text-text placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-brand-dark"
+              className="pl-9 pr-3 py-1.5 min-h-[44px] rounded-sm border border-border text-base sm:text-xs w-full sm:w-64 bg-surface text-text placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-brand-dark"
             />
           </div>
 
@@ -561,9 +561,9 @@ export function RecruiterKanbanPage() {
       {/* Candidate Slide-over Drawer */}
       {selectedCandidate && (
         <div className="fixed inset-0 z-50 overflow-hidden bg-overlay flex justify-end">
-          <div className="w-full max-w-lg bg-surface h-full shadow-flat flex flex-col justify-between overflow-y-auto border-l-2 border-border text-left">
+          <div className="w-full sm:max-w-lg bg-surface h-full shadow-flat flex flex-col justify-between overflow-y-auto border-l-2 border-border text-left">
             {/* Drawer Header */}
-            <div className="p-5 sm:p-6 border-b border-divider flex items-start justify-between bg-sand">
+            <div className="p-4 sm:p-6 border-b border-divider flex items-start justify-between bg-sand">
               <div>
                 <GlassBadge variant="indigo" size="md">
                   Stage: {selectedCandidate.stage}

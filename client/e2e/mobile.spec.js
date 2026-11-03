@@ -4,8 +4,9 @@ const DEMO_PASSWORD = process.env.SEED_DEMO_PASSWORD || 'RozgaarDemo2026!';
 const APPLICANT_EMAIL = process.env.SMOKE_APPLICANT_EMAIL || 'applicant@rozgaar.example';
 const RECRUITER_EMAIL = process.env.SMOKE_RECRUITER_EMAIL || 'recruiter@rozgaar.example';
 
-// Test matrix across iPhone SE (375x667) and iPhone 12/13/14 (390x844)
+// Test matrix across compact mobile (320x568), iPhone SE (375x667), and iPhone 13/14 (390x844)
 const MOBILE_VIEWPORTS = [
+  { name: 'Compact Mobile (320x568)', width: 320, height: 568 },
   { name: 'iPhone SE (375x667)', width: 375, height: 667 },
   { name: 'iPhone 13/14 (390x844)', width: 390, height: 844 },
 ];
@@ -154,6 +155,66 @@ for (const vp of MOBILE_VIEWPORTS) {
         return document.documentElement.scrollWidth > document.documentElement.clientWidth;
       });
       expect(hasHorizontalScroll).toBeFalsy();
+    });
+
+    test('7. Auth Pages: Login and Register have zero horizontal scroll and accessible touch targets', async ({ page }) => {
+      // Login page check
+      await page.goto('/login');
+      await page.waitForLoadState('networkidle');
+
+      const loginScroll = await page.evaluate(() => {
+        return document.documentElement.scrollWidth > document.documentElement.clientWidth;
+      });
+      expect(loginScroll).toBeFalsy();
+
+      const emailInput = page.locator('#email');
+      await expect(emailInput).toBeVisible();
+      const emailBox = await emailInput.boundingBox();
+      expect(emailBox?.height).toBeGreaterThanOrEqual(44);
+
+      const submitBtn = page.locator('button[type="submit"]');
+      const submitBox = await submitBtn.boundingBox();
+      expect(submitBox?.height).toBeGreaterThanOrEqual(44);
+
+      // Register page check
+      await page.goto('/register');
+      await page.waitForLoadState('networkidle');
+
+      const registerScroll = await page.evaluate(() => {
+        return document.documentElement.scrollWidth > document.documentElement.clientWidth;
+      });
+      expect(registerScroll).toBeFalsy();
+
+      // Role switcher buttons fit and are clickable
+      const seekerTab = page.locator('button:has-text("Job Seeker")');
+      const employerTab = page.locator('button:has-text("Employer")');
+      await expect(seekerTab).toBeVisible();
+      await expect(employerTab).toBeVisible();
+
+      await employerTab.click();
+      await expect(page.locator('#companyName')).toBeVisible();
+
+      await seekerTab.click();
+      await expect(page.locator('#companyName')).not.toBeVisible();
+    });
+
+    test('8. Applicant Dashboard & Applications: Zero horizontal scroll and full-width mobile cards', async ({ page }) => {
+      // Login as applicant
+      await page.goto('/login');
+      await page.locator('#email').fill(APPLICANT_EMAIL);
+      await page.locator('#password').fill(DEMO_PASSWORD);
+      await page.locator('button[type="submit"]').click();
+
+      await page.waitForURL('**/me/applications', { timeout: 15000 });
+
+      const appScroll = await page.evaluate(() => {
+        return document.documentElement.scrollWidth > document.documentElement.clientWidth;
+      });
+      expect(appScroll).toBeFalsy();
+
+      // Check stat cards are visible
+      const statCard = page.locator('p:has-text("Total Applications")');
+      await expect(statCard).toBeVisible();
     });
   });
 }

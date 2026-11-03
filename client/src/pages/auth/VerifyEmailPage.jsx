@@ -34,28 +34,28 @@ export function VerifyEmailPage() {
   }, [token]);
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-page">
-      <GlassCard className="max-w-md w-full space-y-6 p-8 sm:p-10 bg-surface border-2 border-border rounded-lg shadow-flat text-center">
+    <div className="min-h-[85vh] flex items-center justify-center py-6 sm:py-12 px-3 sm:px-6 lg:px-8 bg-page">
+      <GlassCard className="max-w-md w-full space-y-6 p-4 sm:p-8 md:p-10 bg-surface border-2 border-border rounded-lg shadow-flat text-center">
         {status === 'verifying' && (
           <div className="space-y-4">
-            <Loader2 className="w-12 h-12 text-brand-dark animate-spin mx-auto" aria-hidden="true" />
-            <h1 className="text-xl font-bold text-text">Verifying your email...</h1>
-            <p className="text-sm font-medium text-text-muted">Please wait while we confirm your account.</p>
+            <Loader2 className="w-10 h-10 sm:w-12 sm:h-12 text-brand-dark animate-spin mx-auto" aria-hidden="true" />
+            <h1 className="text-lg sm:text-xl font-bold text-text">Verifying your email...</h1>
+            <p className="text-xs sm:text-sm font-medium text-text-muted">Please wait while we confirm your account.</p>
           </div>
         )}
 
         {status === 'success' && (
           <div className="space-y-4">
-            <div className="w-14 h-14 bg-mint text-mint-text rounded-md flex items-center justify-center mx-auto border-2 border-mint-text shadow-flat">
-              <CheckCircle2 className="w-8 h-8 text-mint-text" aria-hidden="true" />
+            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-mint text-mint-text rounded-md flex items-center justify-center mx-auto border-2 border-mint-text shadow-flat">
+              <CheckCircle2 className="w-7 h-7 sm:w-8 sm:h-8 text-mint-text" aria-hidden="true" />
             </div>
-            <h1 className="text-2xl font-extrabold text-text">Email Verified!</h1>
-            <p className="text-sm font-medium text-text leading-relaxed">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-text">Email Verified!</h1>
+            <p className="text-xs sm:text-sm font-medium text-text leading-relaxed">
               Your email address has been successfully verified. You now have full access to apply for jobs and manage pipelines.
             </p>
             <div className="pt-4">
               <Link to="/me/applications">
-                <GlassButton variant="primary">
+                <GlassButton variant="primary" className="min-h-[44px]">
                   Go to Dashboard <ArrowRight className="w-4 h-4 ml-2" aria-hidden="true" />
                 </GlassButton>
               </Link>
@@ -65,17 +65,17 @@ export function VerifyEmailPage() {
 
         {status === 'error' && (
           <div className="space-y-4">
-            <div className="w-14 h-14 bg-error-bg text-error rounded-md flex items-center justify-center mx-auto border-2 border-error shadow-flat">
-              <AlertCircle className="w-8 h-8 text-error" aria-hidden="true" />
+            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-error-bg text-error rounded-md flex items-center justify-center mx-auto border-2 border-error shadow-flat">
+              <AlertCircle className="w-7 h-7 sm:w-8 sm:h-8 text-error" aria-hidden="true" />
             </div>
-            <h1 className="text-2xl font-extrabold text-text">Verification Failed</h1>
-            <p className="text-sm font-bold text-error bg-error-bg p-3.5 rounded-md border-2 border-error">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-text">Verification Failed</h1>
+            <p className="text-xs sm:text-sm font-bold text-error bg-error-bg p-3.5 rounded-md border-2 border-error">
               {errorMessage}
             </p>
             <div className="pt-2">
               <Link
                 to="/login"
-                className="inline-flex items-center text-sm font-bold text-brand-dark hover:underline min-h-[44px]"
+                className="inline-flex items-center text-xs sm:text-sm font-bold text-brand-dark hover:underline min-h-[44px]"
               >
                 Back to Login
               </Link>
@@ -85,17 +85,17 @@ export function VerifyEmailPage() {
 
         {status === 'pending' && !token && (
           <div className="space-y-4">
-            <div className="w-14 h-14 bg-sand text-text rounded-md flex items-center justify-center mx-auto border-2 border-border shadow-flat">
-              <MailCheck className="w-8 h-8 text-text" aria-hidden="true" />
+            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-sand text-text rounded-md flex items-center justify-center mx-auto border-2 border-border shadow-flat">
+              <MailCheck className="w-7 h-7 sm:w-8 sm:h-8 text-text" aria-hidden="true" />
             </div>
-            <h1 className="text-2xl font-extrabold text-text">Check Your Email</h1>
-            <p className="text-sm font-medium text-text-muted leading-relaxed">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-text">Check Your Email</h1>
+            <p className="text-xs sm:text-sm font-medium text-text-muted leading-relaxed">
               We sent a verification link to your email address. Please open the link in your email to verify your account.
             </p>
             <div className="pt-2">
               <Link
                 to="/login"
-                className="inline-flex items-center text-sm font-bold text-brand-dark hover:underline min-h-[44px]"
+                className="inline-flex items-center text-xs sm:text-sm font-bold text-brand-dark hover:underline min-h-[44px]"
               >
                 Back to Sign in
               </Link>

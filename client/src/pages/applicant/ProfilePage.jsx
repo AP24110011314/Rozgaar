@@ -253,10 +253,10 @@ export function ProfilePage() {
   const resumes = profile?.resumes || [];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 text-left">
+    <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-5 sm:space-y-8 text-left">
       {/* Page Header Strip */}
-      <div className="bg-sand border-b-2 border-brand p-5 rounded-md">
-        <h1 className="text-2xl font-bold text-text">Applicant Profile & Resumes</h1>
+      <div className="bg-sand border-b-2 border-brand p-4 sm:p-5 rounded-md">
+        <h1 className="text-xl sm:text-2xl font-bold text-text">Applicant Profile & Resumes</h1>
         <p className="text-xs text-text-muted mt-1">
           Manage your personal details, portfolio links, and up to 3 verified resumes.
         </p>
@@ -281,7 +281,7 @@ export function ProfilePage() {
       )}
 
       {/* 1. Profile Details Form */}
-      <div className="bg-surface border border-border rounded-md p-6 sm:p-8 space-y-6 shadow-flat">
+      <div className="bg-surface border border-border rounded-md p-4 sm:p-6 md:p-8 space-y-6 shadow-flat">
         <form onSubmit={handleSaveProfile} className="space-y-6">
           <div className="flex items-center space-x-3 pb-4 border-b border-divider">
             <div className="w-10 h-10 rounded-sm bg-sand text-text flex items-center justify-center border border-border">
@@ -517,6 +517,7 @@ export function ProfilePage() {
               type="submit"
               variant="primary"
               disabled={updateProfileMutation.isPending}
+              className="w-full sm:w-auto justify-center min-h-[44px]"
             >
               {updateProfileMutation.isPending ? (
                 <>
@@ -532,7 +533,7 @@ export function ProfilePage() {
       </div>
 
       {/* 2. Resume Management Section */}
-      <div className="bg-surface border border-border rounded-md p-6 sm:p-8 space-y-6 shadow-flat">
+      <div className="bg-surface border border-border rounded-md p-4 sm:p-6 md:p-8 space-y-6 shadow-flat">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-4 border-b border-divider">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 rounded-sm bg-sand text-text flex items-center justify-center border border-border">
@@ -620,13 +621,14 @@ export function ProfilePage() {
                 </div>
               </div>
 
-              <div className="flex items-center space-x-2 self-end sm:self-auto">
+              <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
                 {!resume.isDefault && (
                   <GlassButton
                     type="button"
                     variant="secondary"
                     size="sm"
                     onClick={() => setDefaultResumeMutation.mutate(resume._id)}
+                    className="min-h-[44px]"
                   >
                     <Star className="w-3.5 h-3.5 mr-1" />
                     Set Default
@@ -637,7 +639,7 @@ export function ProfilePage() {
                   href={resume.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-3 py-1.5 rounded-sm text-xs font-bold text-brand-dark bg-sand hover:bg-accent border border-border transition-colors min-h-[38px]"
+                  className="inline-flex items-center px-3.5 py-2 rounded-sm text-xs font-bold text-brand-dark bg-sand hover:bg-accent border border-border transition-colors min-h-[44px]"
                 >
                   <Download className="w-3.5 h-3.5 mr-1" />
                   Download
@@ -646,7 +648,7 @@ export function ProfilePage() {
                 <button
                   type="button"
                   onClick={() => setResumeToDelete(resume)}
-                  className="inline-flex items-center p-2 rounded-sm text-error hover:bg-error-bg transition-colors cursor-pointer min-h-[38px] min-w-[38px] justify-center"
+                  className="inline-flex items-center p-2.5 rounded-sm text-error hover:bg-error-bg transition-colors cursor-pointer min-h-[44px] min-w-[44px] justify-center"
                   aria-label="Delete resume"
                 >
                   <Trash2 className="w-4 h-4" />
@@ -658,7 +660,7 @@ export function ProfilePage() {
       </div>
 
       {/* 3. Privacy, Data Export & Deletion */}
-      <div className="bg-surface border border-border rounded-md p-6 sm:p-8 space-y-4 shadow-flat">
+      <div className="bg-surface border border-border rounded-md p-4 sm:p-6 md:p-8 space-y-4 shadow-flat">
         <div className="flex items-center space-x-3 pb-3 border-b border-divider">
           <div className="w-10 h-10 rounded-sm bg-sand text-text flex items-center justify-center border border-border">
             <ShieldAlert className="w-5 h-5" />

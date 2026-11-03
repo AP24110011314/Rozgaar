@@ -145,7 +145,7 @@ export function JobDetailPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 text-left pb-32 sm:pb-8">
+    <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-4 sm:space-y-6 text-left pb-32 sm:pb-8">
       {/* Back Link & Header Band */}
       <div className="bg-sand border-b-2 border-brand p-4 rounded-md flex items-center justify-between">
         <Link

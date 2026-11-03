@@ -12,28 +12,56 @@
 > **Rozgaar** (Hindi: **रोज़गार**, meaning *"employment"* or *"livelihood"*) is a full-featured, hyperlocal Applicant Tracking System (ATS) designed specifically for local small and medium businesses (SMBs) and job seekers in their community.
 
 ---
-## Screenshots
+---
 
-Explore the Rozgaar platform through the following screenshots.
-
-1. Authentication & Dashboards
+## 📸 Project Screenshots
 
 <p align="center">
-  <img src="screenshots/login.png" width="48%" alt="Login Page" />
-  <img src="screenshots/Applicant dashboard.png" width="48%" alt="Applicsnt Dashboard" />
-</p>
-<p align="center">
-  <img src="screenshots/recruiter dashboard.png" width="48%" alt="Recruiter Dashboard" />
-  <img src="screenshots/admin dashboard.png" width="48%" alt="Admin Dashboard" />
+  Explore the Rozgaar platform and its key features through the screenshots below.
 </p>
 
-2. Applicant Features
+### 🔐 Authentication
 
 <p align="center">
-  <img src="screenshots/applicant find job section.png" width="48%" alt="Find Jobs Section" />
-  <img src="screenshots/applicant profile& resume section.png" width="48%" alt="Applicant Profile and Resume" />
+  <img src="screenshots/login.png" width="85%" alt="Rozgaar Login Page">
 </p>
 
+### 📊 Dashboards
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <strong>Applicant Dashboard</strong><br><br>
+      <img src="screenshots/Applicsnt dashboard.png" width="100%" alt="Applicant Dashboard">
+    </td>
+    <td align="center" width="50%">
+      <strong>Recruiter Dashboard</strong><br><br>
+      <img src="screenshots/recruiter dashboard.png" width="100%" alt="Recruiter Dashboard">
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <strong>Admin Dashboard</strong><br><br>
+      <img src="screenshots/admin dashboard.png" width="100%" alt="Admin Dashboard">
+    </td>
+    <td align="center" width="50%">
+      <strong>Find Jobs</strong><br><br>
+      <img src="screenshots/applicant find job section.png" width="100%" alt="Applicant Find Jobs">
+    </td>
+  </tr>
+</table>
+
+### 👤 Applicant Profile & Resume
+
+<p align="center">
+  <img src="screenshots/applicant profile& resume section.png" width="85%" alt="Applicant Profile and Resume">
+</p>
+
+---
+
+<p align="center">
+  <strong>Rozgaar — Connecting Local Talent with Local Opportunities.</strong>
+</p>
 
 
 ## 1. Executive Summary & Problem Solved

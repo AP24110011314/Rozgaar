@@ -56,7 +56,7 @@ export function BottomBar() {
   return (
     <nav
       aria-label="Mobile Bottom App Bar"
-      className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-sand border-t-2 border-brand shadow-[0_-2px_10px_rgba(46,29,16,0.15)] pb-[env(safe-area-inset-bottom,0px)]"
+      className="sm:hidden fixed bottom-0 left-0 right-0 z-30 bg-sand border-t-2 border-brand shadow-[0_-2px_10px_rgba(46,29,16,0.15)] pb-[env(safe-area-inset-bottom,0px)]"
     >
       <div className="grid grid-cols-4 h-16 items-center px-1">
         {navItems.map((item) => {

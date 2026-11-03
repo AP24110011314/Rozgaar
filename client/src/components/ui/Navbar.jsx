@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Briefcase, LogOut, Menu, X, ChevronDown, User, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext.jsx';
@@ -38,6 +39,17 @@ export function Navbar() {
     setMobileMenuOpen(false);
     setUserDropdownOpen(false);
   }, [location.pathname]);
+
+  // Prevent background scrolling when mobile menu drawer is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [mobileMenuOpen]);
 
   // Handle Escape key to close mobile drawer and focus trap
   useEffect(() => {
@@ -262,9 +274,9 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Slide-In Navigation Panel for Mobile */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 md:hidden flex justify-end" role="dialog" aria-modal="true" aria-label="Mobile Navigation Menu">
+      {/* Slide-In Navigation Panel for Mobile - Portaled to document.body to ensure it renders above BottomBar */}
+      {mobileMenuOpen && typeof document !== 'undefined' && createPortal(
+        <div className="fixed inset-0 z-[70] md:hidden flex justify-end" role="dialog" aria-modal="true" aria-label="Mobile Navigation Menu">
           {/* Backdrop */}
           <div
             className="fixed inset-0 bg-overlay transition-opacity"
@@ -421,7 +433,8 @@ export function Navbar() {
               </div>
             )}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </header>
   );

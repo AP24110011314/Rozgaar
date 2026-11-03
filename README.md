@@ -20,7 +20,7 @@ Explore the Rozgaar platform through the following screenshots.
 
 <p align="center">
   <img src="screenshots/login.png" width="48%" alt="Login Page" />
-  <img src="screenshots/Applicant dashboard.png" width="48%" alt="Applicant Dashboard" />
+  <img src="screenshots/Applicant dashboard.png" width="48%" alt="Applicsnt Dashboard" />
 </p>
 <p align="center">
   <img src="screenshots/recruiter dashboard.png" width="48%" alt="Recruiter Dashboard" />

@@ -272,33 +272,33 @@ export function Navbar() {
             aria-hidden="true"
           />
 
-          {/* Slide-in Drawer */}
+          {/* Slide-in Drawer with Pinned Header & Pinned Footer */}
           <div
             id="mobile-nav-panel"
             ref={drawerRef}
-            className="relative w-[85vw] max-w-xs sm:max-w-sm h-full bg-sand border-l-2 border-brand p-4 sm:p-5 flex flex-col justify-between shadow-2xl z-10 overflow-y-auto text-left"
+            className="relative w-[85vw] max-w-xs sm:max-w-sm h-[100dvh] max-h-[100dvh] bg-sand border-l-2 border-brand flex flex-col shadow-2xl z-10 text-left overflow-hidden"
           >
-            <div>
-              {/* Drawer Header */}
-              <div className="flex items-center justify-between pb-4 border-b-2 border-brand">
-                <div className="flex items-center space-x-2">
-                  <div className="w-8 h-8 rounded-sm bg-brand-dark flex items-center justify-center text-white">
-                    <Briefcase className="w-4 h-4" />
-                  </div>
-                  <span className="font-extrabold text-lg text-text">Rozgaar Menu</span>
+            {/* 1. Pinned Header */}
+            <div className="flex items-center justify-between p-4 sm:p-5 border-b-2 border-brand shrink-0 bg-sand">
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 rounded-sm bg-brand-dark flex items-center justify-center text-white shrink-0">
+                  <Briefcase className="w-4 h-4" />
                 </div>
-                <button
-                  type="button"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 rounded-sm bg-surface border border-border text-text min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
-                  aria-label="Close navigation menu"
-                >
-                  <X className="w-5 h-5" />
-                </button>
+                <span className="font-extrabold text-base sm:text-lg text-text">Rozgaar Menu</span>
               </div>
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2 rounded-sm bg-surface border border-border text-text min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
+                aria-label="Close navigation menu"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
 
-              {/* Navigation Links */}
-              <nav aria-label="Mobile Navigation Links" className="py-4 space-y-1.5">
+            {/* 2. Scrollable Middle Links */}
+            <div className="flex-1 overflow-y-auto p-4 sm:p-5 py-3">
+              <nav aria-label="Mobile Navigation Links" className="space-y-1.5">
                 <Link
                   to="/jobs"
                   onClick={() => setMobileMenuOpen(false)}
@@ -379,18 +379,18 @@ export function Navbar() {
                     )}
                   </>
                 ) : (
-                  <div className="pt-4 border-t border-brand space-y-3">
+                  <div className="pt-3 border-t border-brand space-y-2.5">
                     <Link
                       to="/login"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="w-full text-center py-3 rounded-md bg-surface border-2 border-border text-base font-bold text-text min-h-[44px] flex items-center justify-center no-underline"
+                      className="w-full text-center py-2.5 rounded-md bg-surface border-2 border-border text-base font-bold text-text min-h-[44px] flex items-center justify-center no-underline"
                     >
                       Log in
                     </Link>
                     <Link
                       to="/register"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="w-full text-center py-3 rounded-md bg-brand-dark text-white border border-brand-dark text-base font-bold min-h-[44px] flex items-center justify-center no-underline shadow-flat"
+                      className="w-full text-center py-2.5 rounded-md bg-brand-dark text-white border border-brand-dark text-base font-bold min-h-[44px] flex items-center justify-center no-underline shadow-flat"
                     >
                       Sign up
                     </Link>
@@ -399,11 +399,11 @@ export function Navbar() {
               </nav>
             </div>
 
-            {/* Drawer Footer with Authenticated User Status */}
+            {/* 3. Pinned Footer: Always Visible with Safe Area Inset & No Bottom Clipping */}
             {isAuthenticated && (
-              <div className="pt-4 border-t-2 border-brand space-y-3">
-                <div className="bg-surface p-3 rounded-md border border-border">
-                  <p className="font-bold text-text truncate">{user.name}</p>
+              <div className="shrink-0 p-4 sm:p-5 border-t-2 border-brand bg-sand space-y-2.5 pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))]">
+                <div className="bg-surface p-2.5 rounded-md border border-border">
+                  <p className="font-bold text-sm text-text truncate">{user.name}</p>
                   <p className="text-xs text-text-muted truncate">{user.email}</p>
                   <span className="inline-block mt-1 px-2 py-0.5 rounded-sm bg-sand text-text font-bold text-[10px] uppercase border border-border">
                     {user.role}

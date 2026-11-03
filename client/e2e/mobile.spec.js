@@ -67,7 +67,7 @@ for (const vp of MOBILE_VIEWPORTS) {
       await expect(mobileNav).not.toBeVisible();
     });
 
-    test('3. Mobile Bottom App Bar is fixed and accessible', async ({ page }) => {
+    test('3. Mobile Bottom App Bar is fixed, accessible, and activates only unique matching route', async ({ page }) => {
       await page.goto('/jobs');
 
       const bottomBar = page.locator('nav[aria-label="Mobile Bottom App Bar"]');
@@ -78,6 +78,20 @@ for (const vp of MOBILE_VIEWPORTS) {
       await expect(findJobsLink).toBeVisible();
       const boundingBox = await findJobsLink.boundingBox();
       expect(boundingBox?.height).toBeGreaterThanOrEqual(44);
+
+      // Verify on /login, ONLY "Sign in" is active; no duplicate "Alerts" active
+      await page.goto('/login');
+      const signInTab = bottomBar.locator('a:has-text("Sign in")');
+      await expect(signInTab).toBeVisible();
+      await expect(signInTab).toHaveClass(/bg-accent/);
+
+      // Alerts must not exist in unauthenticated bottom bar
+      const alertsTab = bottomBar.locator('a:has-text("Alerts")');
+      await expect(alertsTab).toHaveCount(0);
+
+      // Other tabs must NOT have active class
+      const savedTab = bottomBar.locator('a:has-text("Saved")');
+      await expect(savedTab).not.toHaveClass(/bg-accent/);
     });
 
     test('4. Job Search: Filter button opens bottom sheet drawer and applies criteria', async ({ page }) => {
@@ -198,7 +212,7 @@ for (const vp of MOBILE_VIEWPORTS) {
       await expect(page.locator('#companyName')).not.toBeVisible();
     });
 
-    test('8. Applicant Dashboard & Applications: Zero horizontal scroll and full-width mobile cards', async ({ page }) => {
+    test('8. Applicant Dashboard & Applications: Zero horizontal scroll and pinned visible logout button in drawer', async ({ page }) => {
       // Login as applicant
       await page.goto('/login');
       await page.locator('#email').fill(APPLICANT_EMAIL);
@@ -215,6 +229,19 @@ for (const vp of MOBILE_VIEWPORTS) {
       // Check stat cards are visible
       const statCard = page.locator('p:has-text("Total Applications")');
       await expect(statCard).toBeVisible();
+
+      // Open mobile menu drawer and verify Log out button is visible and within viewport bounds
+      const hamburgerBtn = page.locator('button[aria-label="Toggle navigation menu"]');
+      await expect(hamburgerBtn).toBeVisible({ timeout: 10000 });
+      await hamburgerBtn.click();
+
+      const logoutBtn = page.locator('#mobile-nav-panel button:has-text("Log out")');
+      await expect(logoutBtn).toBeVisible({ timeout: 5000 });
+
+      const logoutBox = await logoutBtn.boundingBox();
+      expect(logoutBox).not.toBeNull();
+      // Ensure the logout button is within vertical viewport
+      expect(logoutBox.y + logoutBox.height).toBeLessThanOrEqual(vp.height + 10);
     });
   });
 }

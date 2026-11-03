@@ -57,7 +57,7 @@ export function App() {
 
             <Navbar />
 
-            <main id="main-content" className="flex-1 flex flex-col">
+            <main id="main-content" className="flex-1 flex flex-col min-w-0 w-full overflow-x-hidden">
               <Routes>
                 {/* Public Routes */}
                 <Route path="/" element={<HomePage />} />

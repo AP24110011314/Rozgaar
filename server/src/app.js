@@ -31,8 +31,8 @@ app.use(
 // Compression for text/JSON responses
 app.use(compression());
 
-// CORS configuration (supports single origin or comma-separated list)
-const allowedOrigins = env.CLIENT_ORIGIN.split(',').map((o) => o.trim());
+// CORS configuration (supports single origin or comma-separated list, trims trailing slashes)
+const allowedOrigins = env.CLIENT_ORIGIN.split(',').map((o) => o.trim().replace(/\/+$/, ''));
 app.use(
   cors({
     origin: (origin, callback) => {

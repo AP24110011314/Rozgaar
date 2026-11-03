@@ -12,6 +12,29 @@
 > **Rozgaar** (Hindi: **रोज़गार**, meaning *"employment"* or *"livelihood"*) is a full-featured, hyperlocal Applicant Tracking System (ATS) designed specifically for local small and medium businesses (SMBs) and job seekers in their community.
 
 ---
+## Screenshots
+
+Explore the Rozgaar platform through the following screenshots.
+
+1. Authentication & Dashboards
+
+<p align="center">
+  <img src="screenshots/login.png" width="48%" alt="Login Page" />
+  <img src="screenshots/Applicant dashboard.png" width="48%" alt="Applicant Dashboard" />
+</p>
+<p align="center">
+  <img src="screenshots/recruiter dashboard.png" width="48%" alt="Recruiter Dashboard" />
+  <img src="screenshots/admin dashboard.png" width="48%" alt="Admin Dashboard" />
+</p>
+
+2. Applicant Features
+
+<p align="center">
+  <img src="screenshots/applicant find job section.png" width="48%" alt="Find Jobs Section" />
+  <img src="screenshots/applicant profile& resume section.png" width="48%" alt="Applicant Profile and Resume" />
+</p>
+
+
 
 ## 1. Executive Summary & Problem Solved
 
